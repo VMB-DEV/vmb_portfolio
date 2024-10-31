@@ -1,33 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
+
+import 'features/header/page/widget_header.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const Portfolio(),
-    );
-  }
+  runApp(const Portfolio());
 }
 
 class Portfolio extends StatelessWidget {
   const Portfolio({super.key});
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Portfolio"
+    return MaterialApp(
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: AppBackground(
+          child: LayoutBuilder(
+            builder: (ctx, screen) {
+              final headerBox = BoxConstraints.tightFor(
+                height: screen.H * 0.07,
+                width: screen.W,
+              );
+              return Column(
+                children: [
+                  HeaderWidget(box: headerBox),
+                ]
+              );
+            }
+          ),
         ),
       ),
     );
