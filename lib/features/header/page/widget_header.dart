@@ -21,17 +21,19 @@ class HeaderWidget extends StatelessWidget {
     ),
   );
 
-  Widget get _rightPart => box.W > 600 ? _largeRightPart : _compactRightPart;
+  Widget get _rightPart => box.isCompact ? _compactRightPart : _largeRightPart;
   Widget get _largeRightPart => LargeMenuWidget(box: BoxConstraints.tightFor(height: box.H, width: box.W * 0.5),);
   Widget get _compactRightPart => CompactMenuWidget(box: BoxConstraints.tightFor(height: box.H, width: box.W * 0.1),);
 
   Widget get _leftPart {
     return Container(
       height: box.H * 1,
-      width: box.H * 2,
+      width: box.H * 3,
       alignment: Alignment.center,
       child: BorderedText(
-        strokeColor: MyColors.bigTextBorders,
+        // strokeColor: MyColors.bigTextBorders,
+        strokeColor: Colors.blueGrey,
+        // strokeColor: Colors.black38,
         strokeWidth: box.H * 0.05,
         strokeJoin: StrokeJoin.round,
         child: Text(
@@ -47,6 +49,7 @@ class HeaderWidget extends StatelessWidget {
     // style: GoogleFonts.aBeeZee(
     // style: GoogleFonts.sourceCodePro(
     return GoogleFonts.signikaNegative(
+      fontWeight: FontWeight.w800,
       color: MyColors.bigText,
       fontSize: box.H * 0.8,
       shadows: [
@@ -63,5 +66,4 @@ class HeaderWidget extends StatelessWidget {
       ],
     );
   }
-
 }

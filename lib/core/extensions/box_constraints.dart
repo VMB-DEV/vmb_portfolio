@@ -5,4 +5,5 @@ extension BoxConstraintsExtension on BoxConstraints {
   double get W => maxWidth;
   double get maxH => maxHeight;
   double get maxW => maxWidth;
+  bool get isCompact => W < 700;
 }
