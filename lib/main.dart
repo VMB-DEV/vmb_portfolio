@@ -1,17 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
-import 'package:vmb_portfolio/features/catcher/page/catcher_part.dart';
-
+import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
+import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
+import 'package:vmb_portfolio/features/catcher/page/part_catcher.dart';
+import 'package:vmb_portfolio/features/projects/presentation/page/project_part.dart';
 import 'features/header/page/widget_header.dart';
 
 void main() {
   runApp(const Portfolio());
 }
 
-class Portfolio extends StatelessWidget {
+class Portfolio extends StatefulWidget {
   const Portfolio({super.key});
+
+  @override
+  State<Portfolio> createState() => _PortfolioState();
+}
+
+class _PortfolioState extends State<Portfolio> {
+  final scrollController = ScrollController();
+  final List<GlobalKey> navBarKeys = List.generate(4, (_) => GlobalKey());
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,24 +31,42 @@ class Portfolio extends StatelessWidget {
         body: AppBackground(
           child: LayoutBuilder(
             builder: (ctx, screen) {
-              final headerBox = BoxConstraints.tightFor(
-                height: screen.H * 0.07,
-                width: screen.W,
-              );
-              final catcherBox = BoxConstraints.tightFor(
-                height: screen.H * 0.7,
-                width: screen.W,
-              );
+              final allSizes = AllSizes(screen: screen);
               return Column(
                 children: [
-                  HeaderWidget(box: headerBox),
-                  CatcherPart(box: catcherBox),
-                ]
+                  HeaderWidget(sizes: allSizes.header,),
+                  Container(
+                    constraints: allSizes.scrollViewBox,
+                    child: SingleChildScrollView(
+                      controller: scrollController,
+                      scrollDirection: Axis.vertical,
+                      child: Column(
+                        children: [
+                          CatcherPart(sizes: allSizes.catcher, navBarKey: navBarKeys[0],),
+                          TitleWidget("My Projects", allSizes.titles, navBarKey: navBarKeys[1]),
+                          ProjectPart(sizes: allSizes.projects),
+                          // TitleWidget("Experiences", allSizes.titles),
+                          // ExperiencesPart("Experiences", allSizes.),
+                          // TitleWidget("Contact Me", allSizes.titles),
+                          // ContactPart("Experiences", allSizes.),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               );
             }
           ),
         ),
       ),
+    );
+  }
+  void scrollToSection(int navIndex) {
+    final key = navBarKeys[navIndex];
+    Scrollable.ensureVisible(
+      key.currentContext!,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
     );
   }
 }
