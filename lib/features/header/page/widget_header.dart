@@ -2,39 +2,36 @@ import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
-import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:vmb_portfolio/features/header/page/sizes_header.dart';
 
 import 'menu/widget_compact_menu.dart';
 import 'menu/widget_large_menu.dart';
 
 class HeaderWidget extends StatelessWidget {
-  final BoxConstraints box;
-  const HeaderWidget({required this.box, super.key});
+  final HeaderSizes sizes;
+  const HeaderWidget({required this.sizes, super.key});
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    height: box.H,
-    width: box.W,
+  Widget build(BuildContext context) => ConstrainedBox(
+    constraints: sizes.box,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [ _leftPart, _rightPart, ],
     ),
   );
 
-  Widget get _rightPart => box.isCompact ? _compactRightPart : _largeRightPart;
-  Widget get _largeRightPart => LargeMenuWidget(box: BoxConstraints.tightFor(height: box.H, width: box.W * 0.5),);
-  Widget get _compactRightPart => CompactMenuWidget(box: BoxConstraints.tightFor(height: box.H, width: box.W * 0.1),);
+  BoxConstraints get box => sizes.box;
+  Widget get _rightPart => sizes.isCompact
+      ? CompactMenuWidget(box: sizes.rightPartBox)
+      : LargeMenuWidget(box: sizes.rightPartBox);
 
   Widget get _leftPart {
     return Container(
-      height: box.H * 1,
-      width: box.H * 3,
+      constraints: sizes.leftPartBox,
       alignment: Alignment.center,
       child: BorderedText(
-        // strokeColor: MyColors.bigTextBorders,
         strokeColor: Colors.blueGrey,
-        // strokeColor: Colors.black38,
-        strokeWidth: box.H * 0.05,
+        strokeWidth: sizes.leftPartStrokeWidth,
         strokeJoin: StrokeJoin.round,
         child: Text(
           "VMB",
@@ -45,22 +42,19 @@ class HeaderWidget extends StatelessWidget {
   }
 
   TextStyle get _initialsStyle {
-    // style: TextStyle(
-    // style: GoogleFonts.aBeeZee(
-    // style: GoogleFonts.sourceCodePro(
     return GoogleFonts.signikaNegative(
       fontWeight: FontWeight.w800,
       color: MyColors.bigText,
-      fontSize: box.H * 0.8,
+      fontSize: sizes.leftPartFontSize,
       shadows: [
         Shadow(
           offset: const Offset(-0.5, -0.5),
-          blurRadius: (box.H * 0.01).clamp(0.4, 2),
+          blurRadius: sizes.leftPartTopBlueRadius,
           color: MyColors.textTopShadow,
         ),
         Shadow(
           offset: const Offset(1.2, 1.2),
-          blurRadius: (box.H * 0.02).clamp(0.2, 3),
+          blurRadius: sizes.leftPartBotBlueRadius,
           color: MyColors.textBotShadow,
         ),
       ],
