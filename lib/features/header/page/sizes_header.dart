@@ -1,5 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:vmb_portfolio/features/header/domain/PartEntity.dart';
 
 import '../../../core/presentation/sizes/sizes.dart';
 
@@ -7,18 +11,24 @@ class HeaderSizes extends Sizes {
   final BoxConstraints box;
   late BoxConstraints _leftPartBox;
   late BoxConstraints _rightPartBox;
-  // late double _rightPart;
+  late BoxConstraints _rightPartCompactTextBox;
+  late EdgeInsetsDirectional _topSmallMargin;
   late EdgeInsetsDirectional _horizontalSmallMargin;
+  late EdgeInsetsDirectional _horizontalMediumMargin;
   late double _rightPartStrokeWidth;
   late double _rightPartFontSize;
   late double _rightPartShadowTopBlueRadius;
   late double _rightPartShadowBotBlueRadius;
+  late double _rightPartCompactMenuDelta;
+  late List<Size> _stringSizes;
+  late Size _biggestStringSize;
+  late Size _rightPartCompactMenuSize;
   late double _leftPartStrokeWidth;
   late double _leftPartFontSize;
   late double _leftPartTopBlurRadius;
   late double _leftPartBotBlurRadius;
 
-  HeaderSizes({required this.box, required super.screen, required super.isCompact}) {
+  HeaderSizes({required this.box, required super.screen}) {
     initLeftPart(box);
     initRightPart(box);
   }
@@ -30,15 +40,33 @@ class HeaderSizes extends Sizes {
     _rightPartFontSize = box.H * 0.35;
     _rightPartStrokeWidth = box.H * 0.025;
     _horizontalSmallMargin = EdgeInsetsDirectional.only(end: box.W * 0.015);
+    _horizontalMediumMargin = EdgeInsetsDirectional.only(end: box.W * 0.03);
+    _topSmallMargin = EdgeInsetsDirectional.only(top: box.W * 0.015);
     _rightPartShadowTopBlueRadius = box.H * 0.01;
     _rightPartShadowBotBlueRadius = box.H * 0.02;
+    _rightPartCompactMenuDelta = box.W * 0.02;
+    _stringSizes = _getStringSizes;
+    _biggestStringSize = _getBiggestStringSize;
+    _rightPartCompactTextBox = BoxConstraints.tightFor(height: _biggestStringSize.height * 1.4, width: _biggestStringSize.width);
+    _rightPartCompactMenuSize = Size(
+      _rightPartCompactTextBox.maxWidth,
+      // _getBiggestStringSize.width,
+      _rightPartCompactTextBox.maxHeight * PartEntity.values.length + _rightPartCompactTextBox.maxHeight / 2,
+    );
   }
   double get rightPartShadowTopBlueRadius => _rightPartShadowTopBlueRadius;
   double get rightPartShadowBotBlueRadius => _rightPartShadowBotBlueRadius;
   EdgeInsetsDirectional get horizontalSmallMargin => _horizontalSmallMargin;
+  EdgeInsetsDirectional get horizontalMediumMargin => _horizontalMediumMargin;
+  EdgeInsetsDirectional get topSmallMargin => _topSmallMargin;
   BoxConstraints get rightPartBox => _rightPartBox;
+  BoxConstraints get rightPartCompactTextBox => _rightPartCompactTextBox;
   double get rightPartFontSize => _rightPartFontSize;
   double get rightPartStrokeWidth => _rightPartStrokeWidth;
+  double get rightPartCompactMenuDelta => _rightPartCompactMenuDelta;
+  List<Size> get stringSizes => _stringSizes;
+  Size get biggestStringWidth => _biggestStringSize;
+  Size get rightPartCompactMenuSize => _rightPartCompactMenuSize;
 
   void initLeftPart(BoxConstraints box) {
     _leftPartBox = BoxConstraints.tightFor(
@@ -55,4 +83,31 @@ class HeaderSizes extends Sizes {
   double get leftPartFontSize => _leftPartFontSize;
   double get leftPartTopBlueRadius => _leftPartTopBlurRadius;
   double get leftPartBotBlueRadius => _leftPartBotBlurRadius;
+
+  Size get _getBiggestStringSize {
+    final biggestWidth = _stringSizes
+        .map((size) => size.width)
+        .reduce(max);
+    final height = _stringSizes.first.height;
+    return Size(biggestWidth, height);
+  }
+
+  Size _getStringSize(String str) {
+    var span = TextSpan(
+      text: str,
+      style: GoogleFonts.rajdhani(
+        fontWeight: FontWeight.w600,
+        fontSize: _rightPartFontSize,
+      ),
+    );
+
+    final textPainter = TextPainter( text: span, maxLines: 1, textDirection: TextDirection.ltr,);
+    textPainter.layout();
+    return textPainter.size;
+  }
+
+  List<Size> get _getStringSizes => PartEntity
+      .names
+      .map((name) => _getStringSize(name))
+      .toList();
 }

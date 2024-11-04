@@ -1,29 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
 import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
+import 'package:vmb_portfolio/core/presentation/state_management/riverpod/provider_scroll.dart';
 import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
 import 'package:vmb_portfolio/features/catcher/page/part_catcher.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/project_part.dart';
 import 'features/header/page/widget_header.dart';
 
 void main() {
-  runApp(const Portfolio());
+  runApp(const ProviderScope(child: Portfolio(),));
 }
 
-class Portfolio extends StatefulWidget {
+class Portfolio extends ConsumerWidget {
   const Portfolio({super.key});
 
   @override
-  State<Portfolio> createState() => _PortfolioState();
-}
-
-class _PortfolioState extends State<Portfolio> {
-  final scrollController = ScrollController();
-  final List<GlobalKey> navBarKeys = List.generate(4, (_) => GlobalKey());
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowMaterialGrid: false,
       debugShowCheckedModeBanner: false,
@@ -32,27 +25,32 @@ class _PortfolioState extends State<Portfolio> {
           child: LayoutBuilder(
             builder: (ctx, screen) {
               final allSizes = AllSizes(screen: screen);
-              return Column(
+              return Stack(
                 children: [
-                  HeaderWidget(sizes: allSizes.header,),
-                  Container(
-                    constraints: allSizes.scrollViewBox,
-                    child: SingleChildScrollView(
-                      controller: scrollController,
-                      scrollDirection: Axis.vertical,
-                      child: Column(
-                        children: [
-                          CatcherPart(sizes: allSizes.catcher, navBarKey: navBarKeys[0],),
-                          TitleWidget("My Projects", allSizes.titles, navBarKey: navBarKeys[1]),
-                          ProjectPart(sizes: allSizes.projects),
-                          // TitleWidget("Experiences", allSizes.titles),
-                          // ExperiencesPart("Experiences", allSizes.),
-                          // TitleWidget("Contact Me", allSizes.titles),
-                          // ContactPart("Experiences", allSizes.),
-                        ],
+                  Column(
+                    children: [
+                      Container(constraints: allSizes.header.box,),
+                      Container(
+                        constraints: allSizes.scrollViewBox,
+                        child: SingleChildScrollView(
+                          controller: ref.watch(scrollRiverpod).scrollController,
+                          scrollDirection: Axis.vertical,
+                          child: Column(
+                            children: [
+                              CatcherPart(sizes: allSizes.catcher, navBarKey: ref.watch(scrollRiverpod).navBarKeys[0],),
+                              TitleWidget("My Projects", allSizes.titles, navBarKey: ref.watch(scrollRiverpod).navBarKeys[1]),
+                              ProjectPart(sizes: allSizes.projects),
+                              // TitleWidget("Experiences", allSizes.titles),
+                              // ExperiencesPart("Experiences", allSizes.),
+                              // TitleWidget("Contact Me", allSizes.titles),
+                              // ContactPart("Experiences", allSizes.),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
+                  HeaderWidget(sizes: allSizes.header,),
                 ],
               );
             }
@@ -61,12 +59,14 @@ class _PortfolioState extends State<Portfolio> {
       ),
     );
   }
-  void scrollToSection(int navIndex) {
-    final key = navBarKeys[navIndex];
-    Scrollable.ensureVisible(
-      key.currentContext!,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
-  }
+
+  // void scrollToSection(int navIndex) {
+  //   // Widget
+  //   final key = navBarKeys[navIndex];
+  //   Scrollable.ensureVisible(
+  //     key.currentContext!,
+  //     duration: const Duration(milliseconds: 500),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 }

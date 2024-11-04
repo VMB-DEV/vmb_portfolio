@@ -2,11 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:vmb_portfolio/core/extensions/offset.dart';
-import 'package:vmb_portfolio/core/extensions/path.dart';
 
 class AnimatedUnderlinePainter extends CustomPainter {
   final String text;
-  // final AnimationController animation;
   final Animation<double> animation;
   final double fontSize;
 
@@ -33,7 +31,6 @@ class AnimatedUnderlinePainter extends CustomPainter {
     final allRect = Rect.fromLTWH(0, 0, size.width, size.height);
     final paint = Paint()
       ..style = PaintingStyle.stroke
-      // ..strokeWidth = 2
       ..strokeWidth = size.height * 0.1
       ..strokeJoin = StrokeJoin.round
       ..shader = LinearGradient(

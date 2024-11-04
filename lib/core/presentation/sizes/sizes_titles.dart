@@ -10,7 +10,7 @@ class TitlesSizes extends Sizes {
   late double _textShadowTopBlurRadius;
   late double _textShadowBotBlurRadius;
 
-  TitlesSizes({required this.box, required super.isCompact, required super.screen}){
+  TitlesSizes({required this.box, required super.screen}){
     _margin = EdgeInsetsDirectional.only(top: screen.H * 0.08, bottom: screen.H * 0.05);
     _textFontSize = isCompact ? screen.W * 0.06 : screen.W * 0.03;
     _textShadowTopBlurRadius = (screen.H * 0.005).clamp(0.1, 2);

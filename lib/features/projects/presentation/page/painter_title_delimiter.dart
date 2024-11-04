@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vmb_portfolio/core/extensions/offset.dart';
 import 'package:vmb_portfolio/core/extensions/path.dart';
-import 'package:vmb_portfolio/core/extensions/rect.dart';
 
 class TitleDelimiterPainter extends CustomPainter {
   @override

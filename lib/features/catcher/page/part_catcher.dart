@@ -15,33 +15,57 @@ class CatcherPart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: navBarKey,
       color: MyColors.test1,
       margin: sizes.topPartMargin.add(sizes.leftPartMargin),
       constraints: sizes.box,
-      child: Row(
-        children: [
-          Container(
-            margin: sizes.horizontalMediumMargin,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _threeLinePresentation,
-                  _specialisation,
-                  _goToWork,
-                  _links
-                ],
-              )
-          ),
-          Container(
-            height: sizes.box.H * 0.85,
-            width: sizes.box.W * 0.4,
-            color: MyColors.test2,
-          ),
-        ],
-      ),
+      child: sizes.isCompact ? _compactLayout : _largeLayout,
     );
   }
 
+  Widget get _compactLayout => Column(
+    children: [
+      Container(
+        height: sizes.box.H * 0.55,
+        width: sizes.box.W * 0.4,
+        color: MyColors.test2,
+      ),
+      Container(
+        margin: sizes.horizontalMediumMargin,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _threeLinePresentation,
+            _specialisation,
+            _goToWork,
+            _links
+          ],
+        ),
+      ),
+    ],
+  );
+
+  Widget get _largeLayout => Row(
+    children: [
+      Container(
+          margin: sizes.horizontalMediumMargin,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _threeLinePresentation,
+              _specialisation,
+              _goToWork,
+              _links
+            ],
+          )
+      ),
+      Container(
+        height: sizes.box.H * 0.85,
+        width: sizes.box.W * 0.4,
+        color: MyColors.test2,
+      ),
+    ],
+  );
 
   Widget get _links => _box(
     child: Row(

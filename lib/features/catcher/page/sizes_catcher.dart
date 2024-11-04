@@ -19,7 +19,7 @@ class CatcherSizes extends Sizes {
   late EdgeInsetsDirectional _horizontalSmallMargin;
   late EdgeInsetsDirectional _horizontalMediumMargin;
 
-  CatcherSizes({required this.box, required super.isCompact, required super.screen}) {
+  CatcherSizes({required this.box, required super.screen}) {
     initText();
     initClickable();
     initMargins();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/features/header/page/sizes_header.dart';
-import 'menu/widget_compact_menu.dart';
+import 'menu/compact/widget_compact_menu.dart';
 import 'menu/widget_large_menu.dart';
 
 class HeaderWidget extends StatelessWidget {
@@ -11,17 +11,18 @@ class HeaderWidget extends StatelessWidget {
   const HeaderWidget({required this.sizes, super.key});
 
   @override
-  Widget build(BuildContext context) => ConstrainedBox(
-    constraints: sizes.box,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [ _leftPart, _rightPart, ],
-    ),
-  );
+  Widget build(BuildContext context) => sizes.isCompact ? Container(
+    color: MyColors.test2,
+    child: Stack( children: [
+      Positioned.fill(child: Align(alignment: Alignment.topLeft, child: _leftPart)) ,
+      Positioned.fill(child: Align(alignment: Alignment.topRight, child: _rightPart))
+    ] ),
+  )
+      : Row( mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [ _leftPart, _rightPart, ], );
 
   BoxConstraints get box => sizes.box;
   Widget get _rightPart => sizes.isCompact
-      ? CompactMenuWidget(box: sizes.rightPartBox)
+      ? CompactMenuWidget(sizes: sizes)
       : LargeMenuWidget(sizes: sizes);
 
   Widget get _leftPart {
