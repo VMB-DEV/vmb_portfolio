@@ -13,10 +13,7 @@ class LargeMenuWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: PartEntity.values.map((part)
-    => HeaderButton(
-      text: part.name,
-      sizes: sizes,
-    )).toList(),
+    => HeaderButton( text: part.name, sizes: sizes, )).toList(),
   );
 }
 
@@ -46,7 +43,7 @@ class _HeaderButtonState extends State<HeaderButton> with SingleTickerProviderSt
 
     animationValue = Tween<double>(
       begin: 0,
-      end: widget.sizes.rightPartShadowTopBlueRadius,
+      end: 1,
     ).animate(_controller);
   }
 
