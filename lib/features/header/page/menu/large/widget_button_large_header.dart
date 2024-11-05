@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vmb_portfolio/core/presentation/state_management/riverpod/provider_scroll.dart';
 
 import '../../../../../core/constants/custom_colors.dart';
+import '../../../../../core/state_management/riverpod/provider_scroll.dart';
 import '../../sizes_header.dart';
 import '../painter_animated_underline.dart';
 

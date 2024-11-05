@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
 import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
-import 'package:vmb_portfolio/core/presentation/state_management/riverpod/provider_scroll.dart';
 import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
 import 'package:vmb_portfolio/features/catcher/page/part_catcher.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/project_part.dart';
+import 'core/state_management/riverpod/provider_scroll.dart';
 import 'features/header/page/widget_header.dart';
 
 void main() {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vmb_portfolio/core/extensions/map.dart';
-import 'package:vmb_portfolio/core/presentation/state_management/riverpod/provider_scroll.dart';
 import 'package:vmb_portfolio/core/presentation/text/widget_animated_text.dart';
 import 'package:vmb_portfolio/features/header/domain/PartEntity.dart';
 import 'package:vmb_portfolio/features/header/page/menu/compact/painter_compact_menu.dart';
 import 'package:vmb_portfolio/features/header/page/sizes_header.dart';
 import '../../../../../core/constants/custom_colors.dart';
+import '../../../../../core/state_management/riverpod/provider_scroll.dart';
 
 class CompactMenuWidget extends ConsumerStatefulWidget {
   final HeaderSizes sizes;
