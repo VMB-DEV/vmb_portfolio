@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:vmb_portfolio/core/extensions/map.dart';
 import 'package:vmb_portfolio/core/presentation/text/widget_animated_text.dart';
@@ -83,91 +84,104 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        if (_menuController.isCompleted) menuFolderTap,
         Positioned.fill(
-          child: Align(
-            alignment: Alignment.topRight,
-            child: Container(
-              margin: widget.sizes.horizontalSmallMargin.add(widget.sizes.topSmallMargin),
-              child: CustomPaint(
-                painter: CompactMenuPainter(
-                  sizes: widget.sizes,
-                  texts: PartEntity.names,
-                  animationPercent: _animation,
-                  heightAnimation: _heightAnimation,
-                  widthAnimation: _widthAnimation,
-                  repaint: _menuController,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SizedBox(
-                      height: widget.sizes.box.maxHeight,
-                      width: widget.sizes.box.maxHeight,
-                    ),
-                    ...PartEntity.names.mapIndexed((i, name)
-                    => GestureDetector(
-                      onTap: () {
-                        ref.read(scrollRiverpod).updateIndexTo(i);
-                      },
-                      child: Container(
-                        margin: widget.sizes.horizontalMediumMargin,
-                        constraints: widget.sizes.rightPartCompactTextBox,
-                        // alignment: Alignment.centerLeft,
-                        alignment: Alignment.centerRight,
-                        child: AnimatedTextWidget(
-                          text: name,
-                          fontSize: widget.sizes.rightPartFontSize,
-                          fontWeight: FontWeight.w600,
-                          textSize: _stringSizes[i],
-                          listenable: _menuController,
-                          animation: _textAnimation,
-                        ),
-                      ),
-                    ))
-                  ],
-                ),
-              ),
-            ),
+          child: Align( alignment: Alignment.topRight,
+            child: unfoldMenu(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  clickableIcon ,
+                  listClickablePart,
+                ],
+              ),),
           ),
         ),
-        Positioned.fill( child: Align( alignment: Alignment.topRight,
-          child: GestureDetector(
-            onTap: () {
-              if (_menuController.isCompleted) {
-                _menuController.reverse();
-              } else {
-                _menuController.forward();
-              }
-            },
-            child: Container(
-              height: widget.sizes.box.maxHeight,
-              width: widget.sizes.box.maxHeight,
-              margin: widget.sizes.horizontalSmallMargin.add(widget.sizes.topSmallMargin),
-              alignment: Alignment.center,
-              child: Icon(
-                Icons.menu,
-                fill: 0.4,
-                weight: 700,
-                grade: 0.5,
-                opticalSize: 50,
-                color: Colors.white,
-                shadows: [
-                  Shadow(
-                    offset: const Offset(-0.5, -0.5),
-                    blurRadius: widget.sizes.rightPartShadowTopBlueRadius,
-                    color: MyColors.textTopShadow,
-                  ),
-                  Shadow(
-                    offset: const Offset(1.2, 1.2),
-                    blurRadius: widget.sizes.rightPartShadowBotBlueRadius,
-                    color: MyColors.textBotShadow,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),),
       ],
     );
   }
+
+  Widget unfoldMenu({required Widget child}) => Container(
+    margin: widget.sizes.horizontalMediumMargin.add(widget.sizes.topSmallMargin),
+    child: CustomPaint(
+      painter: unfoldMenuPainter,
+      child: child,
+    ),
+  );
+
+  CustomPainter get unfoldMenuPainter => CompactMenuPainter(
+    sizes: widget.sizes,
+    texts: PartEntity.names,
+    animationPercent: _animation,
+    heightAnimation: _heightAnimation,
+    widthAnimation: _widthAnimation,
+    repaint: _menuController,
+  );
+
+  Widget get menuFolderTap => GestureDetector(
+    onTap: () {
+      _menuController.reverse();
+    },
+  );
+
+  Widget get listClickablePart => Padding(
+    padding: EdgeInsetsDirectional.only(top: widget.sizes.rightPartCompactMenuDelta),
+    child: Column(
+      children: PartEntity.names.mapIndexed((i, name)
+      => GestureDetector(
+        onTap: () {
+          ref.read(scrollRiverpod).updateIndexTo(i);
+        },
+        child: Container(
+          margin: widget.sizes.horizontalLargeMargin,
+          constraints: widget.sizes.rightPartCompactTextBox,
+          // color: MyColors.test3,
+          // alignment: Alignment.centerRight,
+          alignment: Alignment.centerLeft,
+          child: AnimatedTextWidget(
+            text: name,
+            fontSize: widget.sizes.rightPartFontSize,
+            fontWeight: FontWeight.w600,
+            textSize: _stringSizes[i],
+            listenable: _menuController,
+            animation: _textAnimation,
+          ),
+        ),
+      )).toList(),
+    ),
+  );
+
+  Widget get clickableIcon => GestureDetector(
+    onTap: onMenuIconTap,
+    child: Container(
+      constraints: widget.sizes.rightPartBox,
+      alignment: Alignment.center,
+      child: Icon(
+        Symbols.menu,
+        fill: 1,
+        weight: 700,
+        color: MyColors.bigText,
+        shadows: [
+          Shadow(
+            offset: const Offset(-0.5, -0.5),
+            blurRadius: widget.sizes.rightPartShadowTopBlueRadius,
+            color: MyColors.textTopShadow,
+          ),
+          Shadow(
+            offset: const Offset(1.2, 1.2),
+            blurRadius: widget.sizes.rightPartShadowBotBlueRadius,
+            color: MyColors.textBotShadow,
+          ),
+        ],
+      ),
+    ),
+  );
+
+  VoidCallback get onMenuIconTap => () {
+    if (_menuController.isCompleted) {
+      _menuController.reverse();
+    } else {
+      _menuController.forward();
+    }
+  };
 }

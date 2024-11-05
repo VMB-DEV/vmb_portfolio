@@ -15,6 +15,7 @@ class HeaderSizes extends Sizes {
   late EdgeInsetsDirectional _topSmallMargin;
   late EdgeInsetsDirectional _horizontalSmallMargin;
   late EdgeInsetsDirectional _horizontalMediumMargin;
+  late EdgeInsetsDirectional _horizontalLargeMargin;
   late double _rightPartStrokeWidth;
   late double _rightPartFontSize;
   late double _rightPartShadowTopBlueRadius;
@@ -27,6 +28,7 @@ class HeaderSizes extends Sizes {
   late double _leftPartFontSize;
   late double _leftPartTopBlurRadius;
   late double _leftPartBotBlurRadius;
+  late double _rightPartCompactMenuListTopDelta;
 
   HeaderSizes({required this.box, required super.screen}) {
     initLeftPart(box);
@@ -41,23 +43,27 @@ class HeaderSizes extends Sizes {
     _rightPartStrokeWidth = box.H * 0.025;
     _horizontalSmallMargin = EdgeInsetsDirectional.only(end: box.W * 0.015);
     _horizontalMediumMargin = EdgeInsetsDirectional.only(end: box.W * 0.03);
+    _horizontalLargeMargin = EdgeInsetsDirectional.only(end: box.W * 0.06);
     _topSmallMargin = EdgeInsetsDirectional.only(top: box.W * 0.015);
     _rightPartShadowTopBlueRadius = box.H * 0.01;
     _rightPartShadowBotBlueRadius = box.H * 0.02;
     _rightPartCompactMenuDelta = box.W * 0.02;
     _stringSizes = _getStringSizes;
     _biggestStringSize = _getBiggestStringSize;
-    _rightPartCompactTextBox = BoxConstraints.tightFor(height: _biggestStringSize.height * 1.4, width: _biggestStringSize.width);
+    // _rightPartCompactTextBox = BoxConstraints.tightFor(height: _biggestStringSize.height * 1.4, width: _biggestStringSize.width * 1.2);
+    _rightPartCompactTextBox = BoxConstraints.tightFor(height: _biggestStringSize.height * 1.4, width: _biggestStringSize.width * 1.2);
+    _rightPartCompactMenuListTopDelta = _rightPartCompactTextBox.maxHeight * 0.7;
     _rightPartCompactMenuSize = Size(
       _rightPartCompactTextBox.maxWidth,
-      // _getBiggestStringSize.width,
-      _rightPartCompactTextBox.maxHeight * PartEntity.values.length + _rightPartCompactTextBox.maxHeight / 2,
+      _rightPartCompactTextBox.maxHeight * PartEntity.values.length
+        + _rightPartCompactMenuListTopDelta
     );
   }
   double get rightPartShadowTopBlueRadius => _rightPartShadowTopBlueRadius;
   double get rightPartShadowBotBlueRadius => _rightPartShadowBotBlueRadius;
   EdgeInsetsDirectional get horizontalSmallMargin => _horizontalSmallMargin;
   EdgeInsetsDirectional get horizontalMediumMargin => _horizontalMediumMargin;
+  EdgeInsetsDirectional get horizontalLargeMargin => _horizontalLargeMargin;
   EdgeInsetsDirectional get topSmallMargin => _topSmallMargin;
   BoxConstraints get rightPartBox => _rightPartBox;
   BoxConstraints get rightPartCompactTextBox => _rightPartCompactTextBox;
@@ -67,6 +73,7 @@ class HeaderSizes extends Sizes {
   List<Size> get stringSizes => _stringSizes;
   Size get biggestStringWidth => _biggestStringSize;
   Size get rightPartCompactMenuSize => _rightPartCompactMenuSize;
+  double get rightPartCompactMenuListTopDelta => _rightPartCompactMenuListTopDelta;
 
   void initLeftPart(BoxConstraints box) {
     _leftPartBox = BoxConstraints.tightFor(

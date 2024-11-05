@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class AnimatedTextPainter extends CustomPainter {
@@ -21,13 +21,15 @@ class AnimatedTextPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final currentLeftX = whiteAnimationDisplay.value * textSize.width;
     final currentRightX = whiteAnimationRemove.value * textSize.width;
-    final paint = Paint()
-      ..color = Colors.white.withOpacity(1.0 - whiteAnimationRemove.value)
-      ..style = PaintingStyle.fill;
-
     final Offset topLeft = Offset( textSize.width - currentLeftX, 0);
     final Offset botRight = Offset( textSize.width - currentRightX, textSize.height);
     final rect = Rect.fromPoints(topLeft, botRight);
+    final paint = Paint()
+      ..imageFilter = ImageFilter.blur(sigmaX: 1.2, sigmaY: 1.2, tileMode: TileMode.decal)
+      ..color = Colors.white
+      ..style = PaintingStyle.fill
+    ;
+
     if (whiteAnimationRemove.value < 1.0) canvas.drawRect(rect, paint);
   }
 
