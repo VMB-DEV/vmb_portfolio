@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:ui';
+
 import '../../Project.dart';
 
 class ProjectModel {
@@ -6,6 +7,7 @@ class ProjectModel {
   final String concept;
   final String description;
   final String techno;
+  final Image icon;
   final List<Image> images;
 
   const ProjectModel({
@@ -13,6 +15,7 @@ class ProjectModel {
     required this.concept,
     required this.description,
     required this.techno,
+    required this.icon,
     required this.images,
   });
 }

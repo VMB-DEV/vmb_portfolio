@@ -11,11 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  get_it: ^7.7.0
   cupertino_icons: ^1.0.8
   bordered_text: ^2.0.0
   google_fonts: ^6.2.1
   material_symbols_icons: ^4.2785.1
   flutter_riverpod: ^2.6.1
+  url_launcher: ^6.3.1
+  flutter_linkify: ^6.0.0
 
 dev_dependencies:
   flutter_test:
@@ -25,6 +28,7 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/images/projects/
+    - assets/pictures/projects/
+    - assets/pictures/icons/
 
   uses-material-design: true

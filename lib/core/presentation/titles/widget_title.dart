@@ -18,9 +18,9 @@ class TitleWidget extends StatelessWidget {
       child: Text(
         "Projects",
         style: GoogleFonts.signikaNegative(
-          color: MyColors.bigText,
-          // fontSize: box.H * 0.1,
-          fontSize: sizes.textFontSize,
+          color: MyColors.visibleText,
+          fontSize: sizes.fonts.big,
+          // fontSize: sizes.textFontSize,
           shadows: [
             Shadow(
               offset: const Offset(-0.2, -0.2),

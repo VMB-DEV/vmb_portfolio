@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:vmb_portfolio/core/presentation/sizes/size_font.dart';
+import 'package:vmb_portfolio/core/presentation/sizes/size_margin.dart';
 import 'package:vmb_portfolio/core/presentation/sizes/sizes_titles.dart';
-import 'package:vmb_portfolio/features/header/page/sizes_header.dart';
+import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
 
-import '../../../features/catcher/page/sizes_catcher.dart';
+import '../../../features/catcher/presentation/page/sizes_catcher.dart';
 import '../../../features/projects/presentation/page/sizes_projects.dart';
 
 class Sizes {
@@ -17,12 +19,62 @@ class Sizes {
   late EdgeInsetsDirectional _leftPartMargin;
   EdgeInsetsDirectional get leftPartMargin => _leftPartMargin;
 
+  late MarginSize _smallMargins;
+  MarginSize get smallMargins => _smallMargins;
+  late MarginSize _mediumMargins;
+  MarginSize get mediumMargins => _mediumMargins;
+  late MarginSize _bigMargins;
+  MarginSize get bigMargins => _bigMargins;
+  late FontSizes _fonts;
+  FontSizes get fonts => _fonts;
+
   Sizes({required this.screen}) {
     _isCompact = screen.W < 700;
     final topMarginRatio = isCompact ? 0.08 : 0.15;
     _topPartMargin = EdgeInsetsDirectional.only(top: screen.H * topMarginRatio);
-    _leftPartMargin = EdgeInsetsDirectional.only(start: screen.W * 0.13);
+    _leftPartMargin = EdgeInsetsDirectional.only(start: screen.W * 0.11);
+
+    initSmallMargins();
+    initMediumMargins();
+    initBigMargins();
+    initFonts();
   }
+
+  void initFonts() {
+    final double smallRatio = isCompact ? 0.02 : 0.018;
+    final double mediumRatio = isCompact ? 0.03 : 0.025;
+    final double bigRatio = isCompact ? 0.05 : 0.03;
+    final double extraRatio = 0.06;
+    _fonts = FontSizes(
+      small: smallRatio * screen.H,
+      medium: mediumRatio * screen.H,
+      big: bigRatio * screen.H,
+      extra: extraRatio * screen.H,
+    );
+  }
+
+  void initBigMargins() {
+    final double ratioH = isCompact ? 0.12 : 0.2;
+    final double ratioV = isCompact ? 0.12 : 0.2;
+    _bigMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
+  }
+
+  void initMediumMargins() {
+    final double ratioH = isCompact ? 0.015 : 0.01;
+    final double ratioV = isCompact ? 0.06 : 0.1;
+    _mediumMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
+  }
+  
+  void initSmallMargins() {
+    final double ratioH = isCompact ? 0.01 : 0.005;
+    final double ratioV = isCompact ? 0.03 : 0.05;
+    _smallMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
+  }
+
+  MarginSize initMargins({ required double ratioH, required double ratioV,}) => MarginSize(
+    horizontalValue: screen.W * ratioH,
+    verticalValue: screen.H * ratioV,
+  );
 }
 
 class AllSizes extends Sizes {

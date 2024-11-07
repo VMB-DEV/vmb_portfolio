@@ -64,7 +64,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
         widget.text,
         style: GoogleFonts.rajdhani(
           fontWeight: widget.fontWeight,
-          color: MyColors.bigText,
+          color: MyColors.visibleText,
           fontSize: widget.fontSize,
         ),
       ),
