@@ -12,12 +12,6 @@ class CatcherTextIconLinksState {
     this.linkedin = const AsyncValue.loading(),
   });
 
-  // AsyncValue<Image>  => switch (type) {
-  // AsyncValue<Image> byType(PictureType type) => switch (type) {
-  //   PictureType.github => githubIcon,
-  //   PictureType.linkedin => linkedinIcon,
-  //   _ => throw Exception("CatcherIconState.byType() Error, PictureType unhandled" ),
-  // };
   CatcherTextIconLinksState copyWith({
     AsyncValue<Image>? githubIcon,
     AsyncValue<Image>? linkedinIcon,

@@ -6,7 +6,8 @@ import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/widget_catcher_link.dart';
-import 'package:vmb_portfolio/features/catcher/presentation/state_management/url/provider_catcher_url.dart';
+
+import '../state_management/text_icon_link/provider_catcher_url.dart';
 
 class CatcherPart extends ConsumerStatefulWidget {
   final CatcherSizes sizes;
@@ -142,18 +143,6 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
           error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
           loading: () => const CircularProgressIndicator(),
         ),
-        // CatcherLinkAnimatedWidget(
-        //   PictureType.github,
-        //   text: "github",
-        //   urlString: "https://github.com/VMB-DEV",
-        //   sizes: sizes,
-        // ),
-        // CatcherLinkAnimatedWidget(
-        //   type: PictureType.linkedin,
-        //   text: "linkedin",
-        //   urlString: "https://www.linkedin.com/in/valentin-m-386653186/",
-        //   sizes: sizes,
-        // ),
       ],
     ),
   );

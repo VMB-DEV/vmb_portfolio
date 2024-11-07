@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vmb_portfolio/features/catcher/presentation/state_management/url/provider_catcher_url.dart';
-import 'package:vmb_portfolio/features/catcher/presentation/state_management/url/state_catcher_text_icon_links.dart';
+import 'package:vmb_portfolio/features/catcher/presentation/state_management/text_icon_link/provider_catcher_url.dart';
+import 'package:vmb_portfolio/features/catcher/presentation/state_management/text_icon_link/state_catcher_text_icon_links.dart';
 
 class CatcherTextIconLinksNotifier extends AsyncNotifier<CatcherTextIconLinksState> {
   @override
