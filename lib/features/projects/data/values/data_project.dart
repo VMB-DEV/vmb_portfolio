@@ -1,11 +1,12 @@
 import 'package:vmb_portfolio/core/data/values/picture_type.dart';
+import 'package:vmb_portfolio/core/data/values/url_type.dart';
 
 enum ProjectData {
   portfolio(
     concept: "presenting my self in a interactive way",
     description: "",
     techno:  "Dart Flutter",
-    icon: PictureType.robuzzleIcon,
+    icon: PictureType.portfolioIcon,
     assets: [
       PictureType.blackScreenshot,
       PictureType.blackScreenshot,

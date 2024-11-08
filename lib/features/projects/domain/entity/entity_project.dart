@@ -8,6 +8,7 @@ class ProjectEntity {
   final String concept;
   final String description;
   final String techno;
+  final Image icon;
   final List<Image> images;
 
   const ProjectEntity({
@@ -15,6 +16,7 @@ class ProjectEntity {
     required this.concept,
     required this.description,
     required this.techno,
+    required this.icon,
     required this.images,
   });
 
@@ -23,6 +25,7 @@ class ProjectEntity {
     concept: model.concept,
     description: model.description,
     techno: model.techno,
+    icon: model.icon,
     images: model.images,
   );
 }

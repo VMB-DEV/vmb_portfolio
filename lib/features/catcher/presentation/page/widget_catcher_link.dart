@@ -8,7 +8,7 @@ import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.d
 import '../../../../core/constants/custom_colors.dart';
 import '../../../../core/presentation/pictures/painter_animated_shadow_picture.dart';
 import '../../../../core/utils/logs.dart';
-import '../../../header/presentation/page/menu/painter_animated_underline.dart';
+import '../../../../core/presentation/text/painter_animated_underline.dart';
 import '../../domain/entity/entity_icon_text_link.dart';
 
 class CatcherLinkAnimatedWidget extends ConsumerStatefulWidget {
