@@ -55,7 +55,7 @@ class _ButtonLargeHeaderWidget extends ConsumerState<ButtonLargeHeaderWidget> wi
       hitTestBehavior: HitTestBehavior.translucent,
       onEnter: (_) => setHover(true),
       onExit: (_) => setHover(false),
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
           ref.read(scrollRiverpod).updateIndexTo(widget.index);
         },
