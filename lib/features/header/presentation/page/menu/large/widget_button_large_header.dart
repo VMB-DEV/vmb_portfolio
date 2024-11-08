@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../../../core/constants/custom_colors.dart';
 import '../../../../../../core/state_management/riverpod/scroll/provider_scroll.dart';
 import '../../sizes_header.dart';
-import '../painter_animated_underline.dart';
+import '../../../../../../core/presentation/text/painter_animated_underline.dart';
 
 class ButtonLargeHeaderWidget extends ConsumerStatefulWidget {
   final String text;
