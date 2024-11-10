@@ -10,10 +10,12 @@ class ButtonLargeHeaderWidget extends ConsumerStatefulWidget {
   final String text;
   final int index;
   final HeaderSizes sizes;
+  final VoidCallback onTap;
   const ButtonLargeHeaderWidget({
     required this.text,
     required this.sizes,
     required this.index,
+    required this.onTap,
     super.key,
   });
 
@@ -56,42 +58,37 @@ class _ButtonLargeHeaderWidget extends ConsumerState<ButtonLargeHeaderWidget> wi
       onEnter: (_) => setHover(true),
       onExit: (_) => setHover(false),
       child: InkWell(
-        onTap: () {
-          ref.read(scrollRiverpod).updateIndexTo(widget.index);
-        },
+        onTap: widget.onTap,
         child: Container(
           margin: sizes.horizontalSmallMargin,
           child: CustomPaint(
-            painter: AnimatedUnderlinePainter(
-              text: widget.text,
-              animation: animationValue,
-              fontSize: sizes.fonts.medium,
-              repaint: _controller,
-            ),
+            painter: animatedPainter,
             child: Text(
               widget.text,
-              style: GoogleFonts.signikaNegative(
-                color: MyColors.visibleText,
-                fontSize: sizes.fonts.medium,
-                shadows: onHover ? [
-                  Shadow(
-                    offset: const Offset(-0.5, -0.5),
-                    blurRadius: sizes.rightPartShadowTopBlueRadius,
-                    color: MyColors.textTopShadow,
-                  ),
-                  Shadow(
-                    offset: const Offset(1.2, 1.2),
-                    blurRadius: sizes.rightPartShadowBotBlueRadius,
-                    color: MyColors.textBotShadow,
-                  ),
-                ] : [],
-              ),
+              style: textStyle,
             ),
           ),
         ),
       ),
     );
   }
+
+  TextStyle get textStyle => GoogleFonts.signikaNegative(
+    color: MyColors.visibleText,
+    fontSize: sizes.fonts.medium,
+    shadows: onHover ? [
+      Shadow(
+        offset: const Offset(-0.5, -0.5),
+        blurRadius: sizes.rightPartShadowTopBlueRadius,
+        color: MyColors.textTopShadow,
+      ),
+      Shadow(
+        offset: const Offset(1.2, 1.2),
+        blurRadius: sizes.rightPartShadowBotBlueRadius,
+        color: MyColors.textBotShadow,
+      ),
+    ] : [],
+  );
 
   void setHover(bool state) {
     setState(() => onHover = state);
@@ -101,4 +98,11 @@ class _ButtonLargeHeaderWidget extends ConsumerState<ButtonLargeHeaderWidget> wi
       _controller.reverse();
     }
   }
+
+  CustomPainter get animatedPainter => AnimatedUnderlinePainter(
+    text: widget.text,
+    animation: animationValue,
+    fontSize: sizes.fonts.medium,
+    repaint: _controller,
+  );
 }

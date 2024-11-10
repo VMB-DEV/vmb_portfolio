@@ -1,3 +1,3 @@
 extension ListExtenstion<T> on List<T> {
-  List<T> withoutLast() => sublist(0, length -1);
+  List<T> get withoutLast => sublist(0, length -1);
 }

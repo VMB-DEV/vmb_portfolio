@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
 import 'menu/compact/widget_compact_menu.dart';
-import 'menu/widget_large_menu.dart';
+import 'menu/large/widget_large_menu.dart';
 
 class HeaderWidget extends StatelessWidget {
   final HeaderSizes sizes;

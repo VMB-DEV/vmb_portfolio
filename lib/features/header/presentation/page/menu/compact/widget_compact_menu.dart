@@ -137,7 +137,7 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
     padding: EdgeInsetsDirectional.only(top: sizes.rightPartCompactMenuDelta),
     child: Column(
       children: [
-        ...PartEntity.names.withoutLast().mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
+        ...PartEntity.names.withoutLast.mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
         clickablePart(PartEntity.resume.name, PartEntity.values.indexOf(PartEntity.resume), openResume)
         // clickablePart(text)
       ],
