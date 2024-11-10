@@ -18,6 +18,8 @@ class Sizes {
   EdgeInsetsDirectional get topPartMargin => _topPartMargin;
   late EdgeInsetsDirectional _leftPartMargin;
   EdgeInsetsDirectional get leftPartMargin => _leftPartMargin;
+  late EdgeInsetsDirectional _rightPartMargin;
+  EdgeInsetsDirectional get rightPartMargin => _rightPartMargin;
 
   late MarginSize _smallMargins;
   MarginSize get smallMargins => _smallMargins;
@@ -33,6 +35,7 @@ class Sizes {
     final topMarginRatio = isCompact ? 0.08 : 0.15;
     _topPartMargin = EdgeInsetsDirectional.only(top: screen.H * topMarginRatio);
     _leftPartMargin = EdgeInsetsDirectional.only(start: screen.W * 0.11);
+    _rightPartMargin = EdgeInsetsDirectional.only(end: screen.W * 0.06);
 
     initSmallMargins();
     initMediumMargins();
@@ -54,7 +57,7 @@ class Sizes {
   }
 
   void initBigMargins() {
-    final double ratioH = isCompact ? 0.12 : 0.2;
+    final double ratioH = isCompact ? 0.12 : 0.025;
     final double ratioV = isCompact ? 0.12 : 0.2;
     _bigMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
   }
@@ -67,7 +70,7 @@ class Sizes {
   
   void initSmallMargins() {
     final double ratioH = isCompact ? 0.01 : 0.005;
-    final double ratioV = isCompact ? 0.03 : 0.05;
+    final double ratioV = isCompact ? 0.03 : 0.025;
     _smallMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
   }
 

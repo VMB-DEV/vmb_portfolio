@@ -2,35 +2,37 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 
-import '../../../../core/constants/custom_colors.dart';
-import '../../../../core/presentation/pictures/painter_animated_shadow_picture.dart';
-import '../../../../core/utils/logs.dart';
-import '../../../../core/presentation/text/painter_animated_underline.dart';
-import '../../domain/entity/entity_icon_text_link.dart';
+import '../../constants/custom_colors.dart';
+import '../pictures/painter_animated_shadow_picture.dart';
+import '../../utils/logs.dart';
+import '../sizes/sizes.dart';
+import 'painter_animated_underline.dart';
+import '../../../features/catcher/domain/entity/entity_icon_text_link.dart';
 
-class CatcherLinkAnimatedWidget extends ConsumerStatefulWidget {
-  final CatcherSizes sizes;
+class AnimatedLinkWidget extends ConsumerStatefulWidget {
+  final Sizes sizes;
   final IconTextLinkEntity entity;
-  const CatcherLinkAnimatedWidget({
+  const AnimatedLinkWidget({
     required this.sizes,
     required this.entity,
     super.key,
   });
 
   @override
-  ConsumerState<CatcherLinkAnimatedWidget> createState() => _CatcherLinkAnimatedWidgetState();
+  ConsumerState<AnimatedLinkWidget> createState() => _AnimatedLinkWidgetState();
 }
 
-class _CatcherLinkAnimatedWidgetState extends ConsumerState<CatcherLinkAnimatedWidget> with SingleTickerProviderStateMixin {
+class _AnimatedLinkWidgetState extends ConsumerState<AnimatedLinkWidget> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _iconAnimation;
   late Animation<double> _textAnimation;
   final duration = const Duration(milliseconds: 300);
   bool onHover = false;
-  CatcherSizes get sizes => widget.sizes;
+  Sizes get sizes => widget.sizes;
 
   @override
   void initState() {
@@ -99,24 +101,26 @@ class _CatcherLinkAnimatedWidgetState extends ConsumerState<CatcherLinkAnimatedW
       ),
       child: Text(
         widget.entity.text,
-        style: TextStyle(
-          color: MyColors.visibleText,
-          fontSize: sizes.fonts.small,
-          shadows: onHover ? [
-            const Shadow(
-              offset: Offset(-0.5, -0.5),
-              blurRadius: 2,
-              color: MyColors.textTopShadow,
-            ),
-            const Shadow(
-              offset: Offset(1.2, 1.2),
-              blurRadius: 2,
-              color: MyColors.textBotShadow,
-            ),
-          ] : [],
-        ),
+        style: textStyle,
       ),
     ),
+  );
+  
+  TextStyle get textStyle => GoogleFonts.rajdhani(
+    color: MyColors.visibleText,
+    fontSize: sizes.fonts.small,
+    shadows: onHover ? [
+      const Shadow(
+        offset: Offset(-0.5, -0.5),
+        blurRadius: 2,
+        color: MyColors.textTopShadow,
+      ),
+      const Shadow(
+        offset: Offset(1.2, 1.2),
+        blurRadius: 2,
+        color: MyColors.textBotShadow,
+      ),
+    ] : [],
   );
 
   Widget icon({

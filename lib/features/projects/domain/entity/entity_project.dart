@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import '../../../catcher/domain/entity/entity_icon_text_link.dart';
 import '../../Project.dart';
 import '../../data/model/model_project.dart';
 
@@ -9,6 +10,7 @@ class ProjectEntity {
   final String description;
   final String techno;
   final Image icon;
+  final List<IconTextLinkEntity> links;
   final List<Image> images;
 
   const ProjectEntity({
@@ -17,6 +19,7 @@ class ProjectEntity {
     required this.description,
     required this.techno,
     required this.icon,
+    required this.links,
     required this.images,
   });
 
@@ -26,6 +29,7 @@ class ProjectEntity {
     description: model.description,
     techno: model.techno,
     icon: model.icon,
+    links: model.links.map((pair) => IconTextLinkEntity(text: pair.$2.text, urlString: pair.$2.urlString, icon: pair.$1)).toList(),
     images: model.images,
   );
 }

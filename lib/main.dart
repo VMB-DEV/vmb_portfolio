@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
 import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
 import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/project_part.dart';
+import 'core/constants/custom_colors.dart';
 import 'core/state_management/riverpod/scroll/provider_scroll.dart';
 import 'features/catcher/presentation/page/part_catcher.dart';
 import 'features/header/presentation/page/widget_header.dart';

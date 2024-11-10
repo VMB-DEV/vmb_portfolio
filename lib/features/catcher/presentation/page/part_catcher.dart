@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
-import 'package:vmb_portfolio/features/catcher/presentation/page/widget_catcher_link.dart';
+import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
@@ -105,23 +105,23 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
             color: MyColors.visibleText,
             // fontSize: sizes.specialisationFontSize,
             fontSize: sizes.fonts.medium,
-            shadows: [
-              Shadow(
-                offset: const Offset(-0.2, -0.2),
-                blurRadius: sizes.catchPhraseTopShadowBlurRadius,
-                color: MyColors.textTopShadow,
-              ),
-              Shadow(
-                offset: const Offset(0.05, 0.05),
-                blurRadius: sizes.catchPhraseBotShadowBlurRadius,
-                color: MyColors.textBotShadow,
-              ),
-            ],
+            // shadows: [
+            //   Shadow(
+            //     offset: const Offset(-0.2, -0.2),
+            //     blurRadius: sizes.catchPhraseTopShadowBlurRadius,
+            //     color: MyColors.textTopShadow,
+            //   ),
+            //   Shadow(
+            //     offset: const Offset(0.05, 0.05),
+            //     blurRadius: sizes.catchPhraseBotShadowBlurRadius,
+            //     color: MyColors.textBotShadow,
+            //   ),
+            // ],
           ),
         ),
         ref.watch(catcherIconTextLinkProvider).when(
           data: (state) => state.github.when(
-            data: (entity) => CatcherLinkAnimatedWidget(
+            data: (entity) => AnimatedLinkWidget(
               sizes: sizes,
               entity: entity,
             ),
@@ -133,7 +133,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
         ),
         ref.watch(catcherIconTextLinkProvider).when(
           data: (state) => state.linkedin.when(
-            data: (entity) => CatcherLinkAnimatedWidget(
+            data: (entity) => AnimatedLinkWidget(
               sizes: sizes,
               entity: entity,
             ),

@@ -25,6 +25,7 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
       concept: projectLocalDataSource.getConcept(type),
       description: projectLocalDataSource.getDescription(type),
       techno: projectLocalDataSource.getTechno(type),
+      links: await Future.wait(projectLocalDataSource.getLinks(type).map((pair) async => (await pictureLocalDataSource.getPicture(pair.$1.path), pair.$2)).toList()),
       icon: await switch (type) {
         Project.portfolio => pictureLocalDataSource.getPicture(ProjectData.portfolio.icon.path),
         Project.robuzzle => pictureLocalDataSource.getPicture(ProjectData.robuzzle.icon.path),
