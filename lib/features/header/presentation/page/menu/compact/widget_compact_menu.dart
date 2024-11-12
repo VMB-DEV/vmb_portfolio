@@ -45,7 +45,7 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
       duration: _animationDuration,
       reverseDuration: _menuReverseAnimationDuration,
       vsync: this,
-    )..forward();
+    );
     _animation = Tween<double>( begin: 0.0, end: 1.0, ).animate(_menuController);
     _heightAnimation = Tween<double>( begin: 0.0, end: 1.0, ).animate(
       CurvedAnimation(

@@ -55,9 +55,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
   Widget get _compactLayout => Column(
     children: [
       Container(
-        height: widget.sizes.box.H * 0.55,
-        width: widget.sizes.box.W * 0.4,
-        color: MyColors.test2,
+        constraints: sizes.catcherAnimationCompactBox,
+        child: AnimatedCatcherRightPartWidget(sizes: sizes,),
       ),
       Container(
         margin: widget.sizes.horizontalMediumMargin,
