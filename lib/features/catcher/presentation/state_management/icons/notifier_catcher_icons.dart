@@ -13,18 +13,15 @@ class CatcherIconsNotifier extends AsyncNotifier<CatcherIconsState> {
 
     try {
       final results = await Future.wait([
-        useCase.getGithubIcon(),
-        useCase.getLinkedinIcon(),
+        useCase.getBackGroundIcons(),
       ]);
 
       return CatcherIconsState(
-        githubIcon: AsyncValue.data(results[0]),
-        linkedinIcon: AsyncValue.data(results[1]),
+          backgroundIcons: AsyncValue.data(results[0]),
       );
     } catch (e, stack) {
       return CatcherIconsState(
-        githubIcon: AsyncValue.error(e, stack),
-        linkedinIcon: AsyncValue.error(e, stack),
+        backgroundIcons: AsyncValue.error(e, stack)
       );
     }
   }

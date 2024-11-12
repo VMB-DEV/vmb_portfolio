@@ -13,12 +13,12 @@ class CatcherTextIconLinksState {
   });
 
   CatcherTextIconLinksState copyWith({
-    AsyncValue<Image>? githubIcon,
-    AsyncValue<Image>? linkedinIcon,
+    AsyncValue<IconTextLinkEntity>? githubIcon,
+    AsyncValue<IconTextLinkEntity>? linkedinIcon,
   }) {
     return CatcherTextIconLinksState(
-      github: github ?? this.github,
-      linkedin: linkedin ?? this.linkedin,
+      github: githubIcon ?? github,
+      linkedin: linkedinIcon ?? linkedin,
     );
   }
 }

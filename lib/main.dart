@@ -13,9 +13,7 @@ import 'features/header/presentation/page/widget_header.dart';
 import 'core/di/injection.dart' as di;
 
 Future<void> main() async {
-  await di.init().then((_) {
-    runApp(const ProviderScope(child: Portfolio(),));
-  });
+  runApp(const ProviderScope(child: Portfolio(),));
 }
 
 class Portfolio extends ConsumerWidget {
@@ -67,14 +65,4 @@ class Portfolio extends ConsumerWidget {
       ),
     );
   }
-
-  // void scrollToSection(int navIndex) {
-  //   // Widget
-  //   final key = navBarKeys[navIndex];
-  //   Scrollable.ensureVisible(
-  //     key.currentContext!,
-  //     duration: const Duration(milliseconds: 500),
-  //     curve: Curves.easeInOut,
-  //   );
-  // }
 }

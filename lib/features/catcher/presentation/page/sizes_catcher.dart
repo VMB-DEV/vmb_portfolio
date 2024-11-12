@@ -22,6 +22,25 @@ class CatcherSizes extends Sizes {
     initText();
     initClickable();
     margins();
+    initAnimation();
+  }
+
+  late double _catcherAnimationLeftAt;
+  double get catcherAnimationLeftAt => _catcherAnimationLeftAt;
+  late double _catcherAnimationXTravel;
+  double get catcherAnimationXTravel => _catcherAnimationXTravel;
+  late double _catcherAnimationYTravel;
+  double get catcherAnimationYTravel => _catcherAnimationYTravel;
+  late double _catcherAnimationLeft;
+  double get catcherAnimationLeft => _catcherAnimationLeft;
+  late double _catcherAnimationTop;
+  double get catcherAnimationTop => _catcherAnimationTop;
+  void initAnimation() {
+    _catcherAnimationLeftAt = screen.W * 0.4;
+    _catcherAnimationXTravel = screen.W / 2.31;
+    _catcherAnimationYTravel = screen.W / 9.25;
+    _catcherAnimationLeft = -screen.W / 3.08;
+    _catcherAnimationTop = -screen.W / 14.23;
   }
 
   void margins() {

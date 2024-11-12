@@ -8,6 +8,5 @@ class GetCatcherIconsUseCase {
 
   GetCatcherIconsUseCase({required this.catcherIconsRepository});
 
-  Future<Image> getGithubIcon() => catcherIconsRepository.getCatcherImage(PictureType.github);
-  Future<Image> getLinkedinIcon() => catcherIconsRepository.getCatcherImage(PictureType.linkedin);
+  Future<List<Image>> getBackGroundIcons() => catcherIconsRepository.getBackGroundIcons();
 }

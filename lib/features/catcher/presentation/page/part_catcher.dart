@@ -6,6 +6,7 @@ import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
+import 'package:vmb_portfolio/features/catcher/presentation/page/widget/fun/animated_widget_right_part.dart';
 
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
@@ -73,24 +74,24 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     ],
   );
 
-  Widget get _largeLayout => Row(
+  Widget get _largeLayout => Stack(
     children: [
-      Container(
-          margin: sizes.horizontalMediumMargin,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _threeLinePresentation,
-              _specialisation,
-              _techno,
-              _links,
-            ],
-          )
+      Positioned.fill(
+        left: widget.sizes.catcherAnimationLeftAt,
+          child: AnimatedCatcherRightPartWidget(sizes: sizes,),
+        // ),
       ),
       Container(
-        height: sizes.box.H * 0.85,
-        width: sizes.box.W * 0.4,
-        color: MyColors.test2,
+        margin: sizes.horizontalMediumMargin,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _threeLinePresentation,
+            _specialisation,
+            _techno,
+            _links,
+          ],
+        ),
       ),
     ],
   );
@@ -101,22 +102,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
         Text(
           "Find me here : ",
           style: GoogleFonts.rajdhani(
-            // fontWeight: FontWeight.w600,
             color: MyColors.visibleText,
-            // fontSize: sizes.specialisationFontSize,
             fontSize: sizes.fonts.medium,
-            // shadows: [
-            //   Shadow(
-            //     offset: const Offset(-0.2, -0.2),
-            //     blurRadius: sizes.catchPhraseTopShadowBlurRadius,
-            //     color: MyColors.textTopShadow,
-            //   ),
-            //   Shadow(
-            //     offset: const Offset(0.05, 0.05),
-            //     blurRadius: sizes.catchPhraseBotShadowBlurRadius,
-            //     color: MyColors.textBotShadow,
-            //   ),
-            // ],
           ),
         ),
         ref.watch(catcherIconTextLinkProvider).when(

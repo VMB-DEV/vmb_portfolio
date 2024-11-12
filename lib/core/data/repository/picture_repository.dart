@@ -18,4 +18,8 @@ class PictureRepository extends CatcherIconsRepository {
     }
   }
 
+  @override
+  Future<List<Image>> getBackGroundIcons() {
+    return pictureLocalDataSource.getPictures(PictureType.slidingIcons.map((type) => type.path).toList());
+  }
 }
