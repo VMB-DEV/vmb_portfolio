@@ -24,10 +24,6 @@ class ProjectPart extends ConsumerWidget {
           error: (_,__) => const Icon(Icons.error, color: MyColors.error,),
           loading: () => const CircularProgressIndicator(),
         );
-        // return Column(
-        //   children: Project.values.map((project)
-        //   => ProjectWidget(type: project, sizes: sizes,)).toList(),
-        // );
       }
     );
   }

@@ -64,6 +64,10 @@ class _AnimatedLinkWidgetState extends ConsumerState<AnimatedLinkWidget> with Si
     super.dispose();
   }
 
+  EdgeInsetsGeometry get padd => sizes.isCompact
+      ? sizes.mediumMargins.start.add(sizes.smallMargins.top)
+      : sizes.mediumMargins.start;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -137,7 +141,6 @@ class _AnimatedLinkWidgetState extends ConsumerState<AnimatedLinkWidget> with Si
   );
 
   void setHover(bool state) {
-    Log.red('_CatcherLinkAnimatedWidgetState.setHover - $state');
     setState(() => onHover = state);
     if (state) {
       _controller.forward();

@@ -31,7 +31,7 @@ class Sizes {
   FontSizes get fonts => _fonts;
 
   Sizes({required this.screen}) {
-    _isCompact = screen.W < 700;
+    _isCompact = screen.W < 1000;
     final topMarginRatio = isCompact ? 0.08 : 0.15;
     _topPartMargin = EdgeInsetsDirectional.only(top: screen.H * topMarginRatio);
     _leftPartMargin = EdgeInsetsDirectional.only(start: screen.W * 0.11);
@@ -69,7 +69,8 @@ class Sizes {
   }
   
   void initSmallMargins() {
-    final double ratioH = isCompact ? 0.01 : 0.005;
+    // final double ratioH = isCompact ? 0.01 : 0.005;
+    final double ratioH = isCompact ? 0.006 : 0.005;
     final double ratioV = isCompact ? 0.03 : 0.025;
     _smallMargins = initMargins(ratioH: ratioH, ratioV: ratioV);
   }
