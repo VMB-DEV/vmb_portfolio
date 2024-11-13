@@ -1,7 +1,7 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:vmb_portfolio/core/data/values/picture_type.dart';
 
 abstract class CatcherIconsRepository {
-  Future<Image> getCatcherImage(PictureType type);
-  Future<List<Image>> getBackGroundIcons();
+  Future<ui.Image> getCatcherLinkIcon(PictureType type);
+  Future<List<ui.Image>> getBackGroundImages();
 }

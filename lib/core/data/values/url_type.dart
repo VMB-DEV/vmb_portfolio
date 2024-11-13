@@ -1,15 +1,27 @@
 enum UrlType {
-  myGithub(
+  github(
     text: "github",
     urlString: "https://github.com/VMB-DEV",
   ),
-  myLinkedin(
+  linkedin(
     text: "linkedin",
     urlString: "https://www.linkedin.com/in/valentin-m-386653186/",
   ),
   myResume(
     text: "resume",
     urlString: "https://drive.google.com/file/d/1d8ztqqHf4nYo_Ie-TARK3uFLzZGJK0f0/view?usp=sharing",
+  ),
+  myGithub(
+    text: "github.com/VMB-DEV",
+    urlString: "https://github.com/VMB-DEV",
+  ),
+  myLinkedin(
+    text: "Valentin Marchet Le Bouteilliec",
+    urlString: "https://www.linkedin.com/in/valentin-m-386653186/",
+  ),
+  myMail(
+    text: "write me a mail",
+    urlString: "mailto:cv2110.cut990@passmail.net",
   ),
   portfolioHosted(
     text: "firebase-web-app",

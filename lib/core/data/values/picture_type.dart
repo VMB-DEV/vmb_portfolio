@@ -2,6 +2,7 @@ enum PictureType {
   github( path: "/pictures/icons/100x100-github-white.png", ),
   linkedin( path: "/pictures/icons/100x100-linkedin-white.png", ),
   firebase( path: "/pictures/icons/200x200-firebase-white.png"),
+  mail( path: "/pictures/icons/512x512-mail.png"),
   playstore( path: "/pictures/icons/512x512-playstore.png"),
   blackScreenshot(path: "/pictures/projects/540x1085-black-screenshot.png"),
   portfolioIcon(path: "/pictures/projects/portfolio/512x512-face.jpeg"),
@@ -14,6 +15,7 @@ enum PictureType {
   snakeScreenshot2( path: "/pictures/projects/snake/screenshot2.png", ),
   snakeScreenshot3( path: "/pictures/projects/snake/screenshot3.png", ),
   spaceWarsIcon( path: "/pictures/projects/spacewars/512x512-spacewars-icon.png"),
+  // spaceWarsIcon( path: "assets/assets/pictures/projects/spacewars/512x512-spacewars-icon.png"),
   spaceWarsScreenshot1( path: "/pictures/projects/spacewars/screenshot1.png"),
   spaceWarsScreenshot2( path: "/pictures/projects/spacewars/screenshot2.png"),
   spaceWarsScreenshot3( path: "/pictures/projects/spacewars/screenshot3.png"),
@@ -47,6 +49,7 @@ enum PictureType {
   const PictureType({required this.path});
 
   bool get isCatcherIcon => this == github || this == linkedin;
+  bool get isContactIcon => this == github || this == linkedin || this == mail;
   static List<PictureType> get slidingIcons => [
     slideAndroidStudio,
     slideBash,

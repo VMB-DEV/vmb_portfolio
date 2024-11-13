@@ -5,12 +5,12 @@ import 'package:vmb_portfolio/features/header/domain/repository/header_url_repos
 class UrlRepository with CatcherUrlsRepository, HeaderUrlRepository {
   @override
   UrlType getMyGithub() {
-    return UrlType.myGithub;
+    return UrlType.github;
   }
 
   @override
   UrlType getMyLinkedin() {
-    return UrlType.myLinkedin;
+    return UrlType.linkedin;
   }
 
   @override

@@ -1,6 +1,5 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 
-import 'package:vmb_portfolio/core/data/values/picture_type.dart';
 import 'package:vmb_portfolio/features/catcher/domain/repository/catcher_icons_repository.dart';
 
 class GetCatcherIconsUseCase {
@@ -8,5 +7,5 @@ class GetCatcherIconsUseCase {
 
   GetCatcherIconsUseCase({required this.catcherIconsRepository});
 
-  Future<List<Image>> getBackGroundIcons() => catcherIconsRepository.getBackGroundIcons();
+  Future<List<ui.Image>> getBackGroundIcons() => catcherIconsRepository.getBackGroundImages();
 }

@@ -19,6 +19,8 @@ dependencies:
   flutter_riverpod: ^2.6.1
   url_launcher: ^6.3.1
   flutter_linkify: ^6.0.0
+  image: ^4.3.0
+
 
 dev_dependencies:
   flutter_test:
@@ -27,8 +29,12 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
-  assets:
-    - assets/pictures/projects/
-    - assets/pictures/icons/
-
   uses-material-design: true
+  assets:
+    - assets/pictures/catcher/
+    - assets/pictures/icons/
+    - assets/pictures/projects/
+    - assets/pictures/projects/portfolio/
+    - assets/pictures/projects/robuzzle/
+    - assets/pictures/projects/spacewars/
+    - assets/pictures/projects/snake/

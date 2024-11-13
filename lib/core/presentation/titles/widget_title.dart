@@ -16,11 +16,10 @@ class TitleWidget extends StatelessWidget {
       key: navBarKey,
       margin: sizes.margin.add(sizes.leftPartMargin),
       child: Text(
-        "Projects",
+        title,
         style: GoogleFonts.signikaNegative(
           color: MyColors.visibleText,
           fontSize: sizes.fonts.big,
-          // fontSize: sizes.textFontSize,
           shadows: [
             Shadow(
               offset: const Offset(-0.2, -0.2),

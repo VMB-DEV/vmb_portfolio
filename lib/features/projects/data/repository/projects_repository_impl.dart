@@ -25,18 +25,18 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
       concept: projectLocalDataSource.getConcept(type),
       description: projectLocalDataSource.getDescription(type),
       techno: projectLocalDataSource.getTechno(type),
-      links: await Future.wait(projectLocalDataSource.getLinks(type).map((pair) async => (await pictureLocalDataSource.getPicture(pair.$1.path), pair.$2)).toList()),
+      links: await Future.wait(projectLocalDataSource.getLinks(type).map((pair) async => (await pictureLocalDataSource.getImageUI(pair.$1.path), pair.$2)).toList()),
       icon: await switch (type) {
-        Project.portfolio => pictureLocalDataSource.getPicture(ProjectData.portfolio.icon.path),
-        Project.robuzzle => pictureLocalDataSource.getPicture(ProjectData.robuzzle.icon.path),
-        Project.snake => pictureLocalDataSource.getPicture(ProjectData.snake.icon.path),
-        Project.spacewars => pictureLocalDataSource.getPicture(ProjectData.spacewars.icon.path),
+        Project.portfolio => pictureLocalDataSource.getImageUI(ProjectData.portfolio.icon.path),
+        Project.robuzzle => pictureLocalDataSource.getImageUI(ProjectData.robuzzle.icon.path),
+        Project.snake => pictureLocalDataSource.getImageUI(ProjectData.snake.icon.path),
+        Project.spacewars => pictureLocalDataSource.getImageUI(ProjectData.spacewars.icon.path),
       },
       images: await switch (type) {
-        Project.portfolio => pictureLocalDataSource.getPictures(ProjectData.portfolio.assets.map((type) => type.path).toList()),
-        Project.robuzzle => pictureLocalDataSource.getPictures(ProjectData.robuzzle.assets.map((type) => type.path).toList()),
-        Project.snake => pictureLocalDataSource.getPictures(ProjectData.snake.assets.map((type) => type.path).toList()),
-        Project.spacewars => pictureLocalDataSource.getPictures(ProjectData.spacewars.assets.map((type) => type.path).toList()),
+        Project.portfolio => pictureLocalDataSource.getImageUIList(ProjectData.portfolio.assets.map((type) => type.path).toList()),
+        Project.robuzzle => pictureLocalDataSource.getImageUIList(ProjectData.robuzzle.assets.map((type) => type.path).toList()),
+        Project.snake => pictureLocalDataSource.getImageUIList(ProjectData.snake.assets.map((type) => type.path).toList()),
+        Project.spacewars => pictureLocalDataSource.getImageUIList(ProjectData.spacewars.assets.map((type) => type.path).toList()),
       }
     );
   }

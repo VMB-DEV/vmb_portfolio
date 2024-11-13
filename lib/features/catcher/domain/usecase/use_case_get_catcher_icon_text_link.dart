@@ -13,10 +13,10 @@ class GetCatcherIconTextLinkUseCase {
 
   Future<IconTextLinkEntity> github() async => IconTextLinkEntity.from(
     catcherUrlsRepository.getMyGithub(),
-    await catcherIconsRepository.getCatcherImage(PictureType.github),
+    await catcherIconsRepository.getCatcherLinkIcon(PictureType.github),
   );
   Future<IconTextLinkEntity> linkedin() async => IconTextLinkEntity.from(
     catcherUrlsRepository.getMyLinkedin(),
-    await catcherIconsRepository.getCatcherImage(PictureType.linkedin),
+    await catcherIconsRepository.getCatcherLinkIcon(PictureType.linkedin),
   );
 }

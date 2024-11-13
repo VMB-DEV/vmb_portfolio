@@ -1,5 +1,6 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
@@ -111,7 +112,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
               sizes: sizes,
               entity: entity,
             ),
-            error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
+            // error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
+            error: (Object error, StackTrace stackTrace) => Text(stackTrace.toString(), style: TextStyle(color: Colors.white),),
             loading: () => const CircularProgressIndicator(),
           ),
           error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
