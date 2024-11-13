@@ -1,3 +1,4 @@
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
@@ -6,6 +7,9 @@ import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 import 'package:vmb_portfolio/features/projects/domain/entity/entity_project.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/painter_title_delimiter.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/sizes_projects.dart';
+import 'package:vmb_portfolio/features/projects/presentation/page/widget_image_popup.dart';
+
+import '../../../../main.dart';
 
 class ProjectWidget extends StatelessWidget {
   final ProjectEntity entity;
@@ -46,22 +50,6 @@ class ProjectWidget extends StatelessWidget {
     ],
   );
 
-  // Widget get _smallAssetDescription => Container(
-  //   margin: sizes.smallMargins.top
-  //       .add(sizes.smallMargins.top)
-  //       .add(sizes.rightPartMargin)
-  //   ,
-  //   child: Row(
-  //     mainAxisAlignment: sizes.isCompact ? MainAxisAlignment.center : MainAxisAlignment.end,
-  //     crossAxisAlignment: CrossAxisAlignment.end,
-  //     children: [
-  //       imageByIndex(0),
-  //       imageByIndex(1),
-  //       imageByIndex(2),
-  //     ],
-  //   ),
-  // );
-
   Widget get _smallPicturesLayout => Container(
     margin: sizes.smallMargins.top
         .add(sizes.smallMargins.top)
@@ -78,14 +66,49 @@ class ProjectWidget extends StatelessWidget {
     ),
   );
 
+  // Widget imageByIndex(int index) => Container(
+  //   margin: sizes.smallMargins.start,
+  //   child: RawImage(
+  //     image: entity.images[index],
+  //     width: sizes.imageWidth,
+  //     height: sizes.imageHeight,
+  //   ),
+  // );
   Widget imageByIndex(int index) => Container(
     margin: sizes.smallMargins.start,
-    child: RawImage(
-      image: entity.images[index],
-      width: sizes.imageWidth,
-      height: sizes.imageHeight,
+    child: Hero(
+      tag: '${entity.type.name}_image_$index',
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () => _showFullScreenImage(index),
+          child: RawImage(
+            image: entity.images[index],
+            width: sizes.imageWidth,
+            height: sizes.imageHeight,
+          ),
+        ),
+      ),
     ),
   );
+  void _showFullScreenImage(int index) {
+    final context = navigatorKey.currentContext;
+    if (context == null) return;
+
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        barrierDismissible: true,
+        pageBuilder: (context, _, __) => ImagePopupWidget(
+          heroTag: '${entity.type.name}_image_$index',
+          image: entity.images[index],
+        ),
+        transitionDuration: const Duration(milliseconds: 300),
+      ),
+    );
+  }
+
+
 
   Widget get _smallTextDescription => Container(
     margin: sizes.smallMargins.top,
@@ -166,3 +189,4 @@ class ProjectWidget extends StatelessWidget {
 
   Widget get _titleDelimiter => Expanded(child: CustomPaint(painter: TitleDelimiterPainter()));
 }
+

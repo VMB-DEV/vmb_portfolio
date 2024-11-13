@@ -14,4 +14,5 @@ class MyColors {
   static const Color bigTextBorders = Colors.yellow;
   static const Color textTopShadow = Color(0xff1a1a1a);
   static const Color textBotShadow = Color(0xfff5f5f5);
+  static const Color darkFilter = Color(0x75151515);
 }
