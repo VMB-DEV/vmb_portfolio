@@ -36,12 +36,15 @@ class CatcherSizes extends Sizes {
   late double _catcherAnimationTop;
   double get catcherAnimationTop => _catcherAnimationTop;
   late BoxConstraints _catcherAnimationCompactBox;
+  late double _iconSize;
+  double get iconSize => _iconSize;
   BoxConstraints get catcherAnimationCompactBox => _catcherAnimationCompactBox;
   void initAnimation() {
+    _iconSize = isCompact ? screen.W * 0.08 : screen.W * 0.05;
     _catcherAnimationLeftAt = screen.W * 0.4;
-    _catcherAnimationXTravel = screen.W / 2.31;
-    _catcherAnimationYTravel = screen.W / 9.25;
-    _catcherAnimationLeft = -screen.W / 3.08;
+    _catcherAnimationXTravel = isCompact ? screen.W / 2.31 : screen.W * 0.65;
+    _catcherAnimationYTravel = isCompact ? screen.W / 9.25 : screen.W * 0.12;
+    _catcherAnimationLeft = isCompact ? -screen.W * 0.7 : -screen.W * 0.1;
     _catcherAnimationTop = -screen.W / 14.23;
     _catcherAnimationCompactBox = BoxConstraints.tightFor(height: screen.H * 0.3, width: screen.W);
   }

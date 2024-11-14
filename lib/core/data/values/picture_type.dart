@@ -43,6 +43,7 @@ enum PictureType {
   slideSignal(path: "/pictures/catcher/slide-signal.png"),
   slideUbuntu(path: "/pictures/catcher/slide-ubuntu.png"),
   slideVivaldi(path: "/pictures/catcher/slide-vivaldi.png"),
+  me(path: "/pictures/catcher/holy-comic.png"),
   ;
 
   final String path;

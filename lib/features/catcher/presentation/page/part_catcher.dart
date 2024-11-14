@@ -79,7 +79,6 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
       Positioned.fill(
         left: widget.sizes.catcherAnimationLeftAt,
           child: AnimatedCatcherRightPartWidget(sizes: sizes,),
-        // ),
       ),
       Container(
         margin: sizes.horizontalMediumMargin,

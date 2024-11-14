@@ -20,7 +20,7 @@ class SlidingIconPainter extends CustomPainter {
   @override
   void paint(ui.Canvas canvas, Size size) {
     final opacity = animationDisappearance.value > 0.0 ? (1.0 - animationDisappearance.value) : animationAppearance.value;
-    final iconSize = 100 + (80 * animationMovement.value);
+    final iconSize = sizes.iconSize + (80 * animationMovement.value);
     final imageSize = Size(iconSize, iconSize);
     final xOffset = sizes.catcherAnimationXTravel * animationMovement.value;
     final yOffset = sizes.catcherAnimationYTravel * animationMovement.value;

@@ -31,4 +31,9 @@ class PictureRepository extends CatcherIconsRepository with ContactLinksReposito
       throw Exception("PictureRepository.getContactLinks type error");
     }
   }
+
+  @override
+  Future<ui.Image> getComicPic() {
+    return pictureLocalDataSource.getImageUI(PictureType.me.path);
+  }
 }

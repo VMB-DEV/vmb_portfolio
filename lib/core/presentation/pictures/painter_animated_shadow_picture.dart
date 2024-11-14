@@ -20,7 +20,7 @@ class AnimatedShadowPicture extends CustomPainter {
     final double currentBlur = animationPercent.value * blur;
 
     Paint blurPaint = Paint()
-      ..imageFilter = ui.ImageFilter.blur(sigmaX: currentBlur, sigmaY: currentBlur); // Adjust the blur strength
+      ..imageFilter = ui.ImageFilter.blur(sigmaX: currentBlur, sigmaY: currentBlur);
 
     canvas.saveLayer(
       Rect.fromLTWH(0, 0, size.width, size.height),
