@@ -1,11 +1,12 @@
 import 'dart:ui';
 
 import 'package:vmb_portfolio/core/data/values/url_type.dart';
+import '../../../../core/data/values/languages.dart';
 import '../../Project.dart';
 
 class ProjectModel {
   final Project type;
-  final String concept;
+  final Map<Languages, String> concept;
   final String description;
   final String techno;
   final Image icon;

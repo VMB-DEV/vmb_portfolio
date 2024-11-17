@@ -1,9 +1,13 @@
+import 'package:vmb_portfolio/core/data/values/languages.dart';
 import 'package:vmb_portfolio/core/data/values/picture_type.dart';
 import 'package:vmb_portfolio/core/data/values/url_type.dart';
 
 enum ProjectData {
   portfolio(
-    concept: "Web application made to present my self in a interactive way. Designs are inspired by Cobinna David's and Saxena Sakshi's work.",
+    concept: {
+      Languages.english: "Web application made to present my self in a interactive way. Designs are inspired by Cobinna David's and Saxena Sakshi's work.",
+      Languages.french: "Application web pour me présenter de manière interactive. Directement inspiré du travail de David Cobinna et Saxena Sakshi."
+    },
     description: "This Web application is deployed with firebase. Built with the Flutter framework, this project has been built with usefull packages like flutter_riverpod (or google_fonts). The main idea was to work in a clean architecture to make a maintainable portfolio and easily upgradable",
     techno:  "Dart, Flutter, Riverpod",
     icon: PictureType.portfolioIcon,
@@ -18,7 +22,10 @@ enum ProjectData {
     ],
   ),
   robuzzle(
-    concept: "Web and Mobile game application. The main purpose of the game is to conceive algorithms to instruct a space ship on how to get all the stars on a map",
+    concept: {
+      Languages.english: "Web and Mobile game application. The main purpose of the game is to conceive algorithms to instruct a space ship on how to get all the stars on a map.",
+      Languages.french: "Application web et mobile. Le jeu se base sur une logique algorithmique de déplacements conditionnés pour résoudre un puzzle en récupérant toutes les étoiles affichées."
+    },
     description: "This application deployed with firebase has been build with Dart on the Flutter framework. The project use ",
     techno:  "Dart, Flutter, BLoC, Hive",
     icon: PictureType.robuzzleIcon,
@@ -34,7 +41,10 @@ enum ProjectData {
     ],
   ),
   snake(
-    concept: "Web and desktop application. Classical snake game with a local multiplayer option.",
+    concept: {
+      Languages.english: "Web and desktop application. Classical snake game with a local multiplayer option.",
+      Languages.french: "Application web et de bureau. Un snake des plus classique jouable à deux en local",
+    },
     description: "Game developed at the end of a 2 weeks bootcamp on python in Yutopia. Mainly used the pygame engine to run it and a structured architecture for an easy maintenance. Hosted on the github service.",
     techno:  "Python Pygame Pygbag",
     icon: PictureType.snakeIcon,
@@ -49,7 +59,10 @@ enum ProjectData {
     ],
   ),
   spacewars(
-    concept: "Native mobile game application. The main purpose is to shoot the local adversary in front.",
+    concept: {
+      Languages.english: "Android native mobile game application. The main purpose is to shoot the local adversary in front.",
+      Languages.french: "Application mobile native android. Inspiré de DUAL, le jeu a pour but est de détruire le vaisseau adverse connecté en wifi",
+    },
     description: "Game developed in Kotlin with the Jetpack toolkit and flows to handle events. Two devices facing each other connected through wifi",
     techno:  "Kotlin Jetpack Compose",
     icon: PictureType.spaceWarsIcon,
@@ -61,7 +74,7 @@ enum ProjectData {
     links: [],
   ),
   ;
-  final String concept;
+  final Map<Languages, String> concept;
   final String description;
   final String techno;
   final PictureType icon;

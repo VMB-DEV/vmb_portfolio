@@ -1,9 +1,12 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
+import 'package:vmb_portfolio/core/data/values/languages.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
+import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
 import 'package:vmb_portfolio/features/projects/domain/entity/entity_project.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/painter_title_delimiter.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/sizes_projects.dart';
@@ -11,7 +14,7 @@ import 'package:vmb_portfolio/features/projects/presentation/page/widget_image_p
 
 import '../../../../main.dart';
 
-class ProjectWidget extends StatelessWidget {
+class ProjectWidget extends ConsumerStatefulWidget {
   final ProjectEntity entity;
   final ProjectsSizes sizes;
   const ProjectWidget({
@@ -21,13 +24,25 @@ class ProjectWidget extends StatelessWidget {
   });
 
   @override
+  ConsumerState<ProjectWidget> createState() => _ProjectWidgetState();
+}
+
+class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
+  ProjectsSizes get _sizes => widget.sizes;
+  ProjectEntity get _entity => widget.entity;
+  late Languages _currentLanguage;
+  
+  @override
   Widget build(BuildContext context) {
+    ref.listen(languageProvider, (previous, next) {
+      next.whenData((language) => setState(() => _currentLanguage = language));
+    });
     return Container(
-      margin: sizes.leftPartMargin.add(sizes.mediumMargins.bot),
+      margin: _sizes.leftPartMargin.add(_sizes.mediumMargins.bot),
       child: Column(
         children: [
           _title,
-          sizes.isCompact ? _compactLayout : _largeLayout,
+          _sizes.isCompact ? _compactLayout : _largeLayout,
         ],
       ),
     );
@@ -41,6 +56,7 @@ class ProjectWidget extends StatelessWidget {
       _smallPicturesLayout
     ],
   );
+
   Widget get _compactLayout => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -51,12 +67,12 @@ class ProjectWidget extends StatelessWidget {
   );
 
   Widget get _smallPicturesLayout => Container(
-    margin: sizes.smallMargins.top
-        .add(sizes.smallMargins.top)
-        .add(sizes.rightPartMargin)
+    margin: _sizes.smallMargins.top
+        .add(_sizes.smallMargins.top)
+        .add(_sizes.rightPartMargin)
     ,
     child: Row(
-      mainAxisAlignment: sizes.isCompact ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.end,
+      mainAxisAlignment: _sizes.isCompact ? MainAxisAlignment.spaceEvenly : MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         imageByIndex(0),
@@ -66,31 +82,24 @@ class ProjectWidget extends StatelessWidget {
     ),
   );
 
-  // Widget imageByIndex(int index) => Container(
-  //   margin: sizes.smallMargins.start,
-  //   child: RawImage(
-  //     image: entity.images[index],
-  //     width: sizes.imageWidth,
-  //     height: sizes.imageHeight,
-  //   ),
-  // );
   Widget imageByIndex(int index) => Container(
-    margin: sizes.smallMargins.start,
+    margin: _sizes.smallMargins.start,
     child: Hero(
-      tag: '${entity.type.name}_image_$index',
+      tag: '${widget.entity.type.name}_image_$index',
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () => _showFullScreenImage(index),
           child: RawImage(
-            image: entity.images[index],
-            width: sizes.imageWidth,
-            height: sizes.imageHeight,
+            image: _entity.images[index],
+            width: _sizes.imageWidth,
+            height: _sizes.imageHeight,
           ),
         ),
       ),
     ),
   );
+
   void _showFullScreenImage(int index) {
     final context = navigatorKey.currentContext;
     if (context == null) return;
@@ -100,53 +109,53 @@ class ProjectWidget extends StatelessWidget {
         opaque: false,
         barrierDismissible: true,
         pageBuilder: (context, _, __) => ImagePopupWidget(
-          heroTag: '${entity.type.name}_image_$index',
-          image: entity.images[index],
+          heroTag: '${_entity.type.name}_image_$index',
+          image: _entity.images[index],
         ),
         transitionDuration: const Duration(milliseconds: 300),
       ),
     );
   }
 
-
-
   Widget get _smallTextDescription => Container(
-    margin: sizes.smallMargins.top,
-    width: sizes.descriptionWidth,
+    margin: _sizes.smallMargins.top,
+    width: _sizes.descriptionWidth,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _concept,
         _techno,
-        sizes.isCompact ? _compactLinks : _largeLinks,
+        _sizes.isCompact ? _compactLinks : _largeLinks,
       ],
     ),
   );
 
-  Widget get _concept => projectText(text: entity.concept);
-  Widget get _techno => projectText(text: entity.techno);
+  Widget get _concept => projectText(text: _entity.concept[_currentLanguage]!);
+
+  Widget get _techno => projectText(text: _entity.techno);
+
   Widget get _largeLinks => Row(
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
-      if (entity.links.isNotEmpty) ...[
+      if (_entity.links.isNotEmpty) ...[
         projectText(text: "links :"),
-        AnimatedLinkWidget(sizes: sizes, entity: entity.links[0])
+        AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[0])
       ],
-      if (entity.links.length > 1) AnimatedLinkWidget(sizes: sizes, entity: entity.links[1]),
-      if (entity.links.length > 2) AnimatedLinkWidget(sizes: sizes, entity: entity.links[2]),
+      if (_entity.links.length > 1) AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[1]),
+      if (_entity.links.length > 2) AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[2]),
     ],
   );
 
   Widget get _compactLinks => Container(
-    margin: sizes.smallMargins.top,
+    margin: _sizes.smallMargins.top,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        if (entity.links.isNotEmpty) ...[
-          AnimatedLinkWidget(sizes: sizes, entity: entity.links[0])
+        if (_entity.links.isNotEmpty) ...[
+          AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[0])
         ],
-        if (entity.links.length > 1) AnimatedLinkWidget(sizes: sizes, entity: entity.links[1]),
-        if (entity.links.length > 2) AnimatedLinkWidget(sizes: sizes, entity: entity.links[2]),
+        if (_entity.links.length > 1) AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[1]),
+        if (_entity.links.length > 2) AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[2]),
       ],
     ),
   );
@@ -158,30 +167,31 @@ class ProjectWidget extends StatelessWidget {
   ],);
 
   Widget get _name => Container(
-    margin: sizes.mediumMargins.start,
+    margin: _sizes.mediumMargins.start,
     child: Text(
-      entity.type.name,
+      _entity.type.name,
       style: GoogleFonts.rajdhani(
       color: MyColors.visibleText,
-      fontSize: sizes.fonts.big,
+      fontSize: _sizes.fonts.big,
     ),),
   );
+
   Widget get _icon => ClipRRect(
-    borderRadius: BorderRadius.all(Radius.circular(sizes.iconBoxRadius)),
+    borderRadius: BorderRadius.all(Radius.circular(_sizes.iconBoxRadius)),
     child: RawImage(
-      image: entity.icon,
-      width: sizes.iconBox.W,
-      height: sizes.iconBox.H,
+      image: _entity.icon,
+      width: _sizes.iconBox.W,
+      height: _sizes.iconBox.H,
     ),
   );
 
   Widget projectText({required String text}) => Container(
-    margin: sizes.smallMargins.top,
+    margin: _sizes.smallMargins.top,
     child: Text(
       text,
       style: GoogleFonts.rajdhani(
         // fontSize: sizes.fonts.medium,
-        fontSize: sizes.isCompact ? sizes.fonts.small : sizes.fonts.medium,
+        fontSize: _sizes.isCompact ? _sizes.fonts.small : _sizes.fonts.medium,
         color: MyColors.visibleText,
       ),
     ),
@@ -189,4 +199,3 @@ class ProjectWidget extends StatelessWidget {
 
   Widget get _titleDelimiter => Expanded(child: CustomPaint(painter: TitleDelimiterPainter()));
 }
-

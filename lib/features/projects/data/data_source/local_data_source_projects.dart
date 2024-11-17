@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:vmb_portfolio/core/data/values/picture_type.dart';
 import 'package:vmb_portfolio/core/data/values/url_type.dart';
 
+import '../../../../core/data/values/languages.dart';
 import '../../Project.dart';
 import '../values/data_project.dart';
 
 abstract class ProjectsLocalDataSource {
-  String getConcept(Project project);
+  Map<Languages, String> getConcept(Project project);
   String getDescription(Project project);
   String getTechno(Project project);
   List<(PictureType, UrlType)> getLinks(Project project);
@@ -14,7 +15,7 @@ abstract class ProjectsLocalDataSource {
 
 class ProjectsLocalDataSourceImpl implements ProjectsLocalDataSource {
   @override
-  String getConcept(Project project) => switch (project) {
+  Map<Languages, String> getConcept(Project project) => switch (project) {
     Project.portfolio => ProjectData.portfolio.concept,
     Project.robuzzle => ProjectData.robuzzle.concept,
     Project.snake => ProjectData.snake.concept,
