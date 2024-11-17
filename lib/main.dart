@@ -1,18 +1,12 @@
 import 'dart:async';
-import 'dart:ui' as ui;
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vmb_portfolio/core/data/values/picture_type.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
-import 'package:vmb_portfolio/core/presentation/pictures/painter_picture.dart';
 import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
 import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
 import 'package:vmb_portfolio/features/contact/presentation/page/contact_part.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/project_part.dart';
-import 'core/state_management/riverpod/pictures/provider_pictures.dart';
 import 'core/state_management/riverpod/scroll/provider_scroll.dart';
 import 'features/catcher/presentation/page/part_catcher.dart';
 import 'features/header/presentation/page/widget_header.dart';
@@ -21,6 +15,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
   runApp(const ProviderScope(child: Portfolio(),));
 }
 

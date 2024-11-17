@@ -13,7 +13,7 @@ class LanguageLocalDataSourceImpl extends LanguageLocalDataSource {
 
   @override
   Languages getStoredLanguage() {
-    final storedName = sharedPreferences.getString(Languages.sharedPreferenceKey);
+    final String storedName = sharedPreferences.getString(Languages.sharedPreferenceKey) ?? Languages.english.name;
     return Languages.values.singleWhere((language) => language.name == storedName, orElse: () => Languages.english,);
   }
 
@@ -21,6 +21,4 @@ class LanguageLocalDataSourceImpl extends LanguageLocalDataSource {
   void setStoredLanguage(Languages language) {
     sharedPreferences.setString(Languages.sharedPreferenceKey, language.name);
   }
-
-
 }

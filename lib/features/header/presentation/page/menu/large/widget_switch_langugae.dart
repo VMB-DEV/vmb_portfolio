@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
+import 'package:vmb_portfolio/features/catcher/presentation/state_management/text_icon_link/provider_catcher_url.dart';
 
 import '../../../../../../core/constants/custom_colors.dart';
 import '../../../../../../core/data/values/languages.dart';
@@ -16,13 +17,14 @@ class LanguageSwitchWidget extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<LanguageSwitchWidget> createState() => _ButtonLargeHeaderWidget();
+  ConsumerState<LanguageSwitchWidget> createState() => _LanguageSwitchWidget();
 }
 
-class _ButtonLargeHeaderWidget extends ConsumerState<LanguageSwitchWidget> with SingleTickerProviderStateMixin {
+class _LanguageSwitchWidget extends ConsumerState<LanguageSwitchWidget> with SingleTickerProviderStateMixin {
   bool onHover = false;
   bool enHover = false;
   bool frHover = false;
+  Languages currentLanguage = Languages.def;
   final duration = const Duration(milliseconds: 200);
   late AnimationController _controller;
   late Animation<double> animationValue;
@@ -41,6 +43,7 @@ class _ButtonLargeHeaderWidget extends ConsumerState<LanguageSwitchWidget> with 
       begin: 0,
       end: 1,
     ).animate(_controller);
+
   }
 
   @override
@@ -51,14 +54,15 @@ class _ButtonLargeHeaderWidget extends ConsumerState<LanguageSwitchWidget> with 
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(languageProvider);
+    ref.listen(languageProvider, (previous, next) {
+      next.whenData((language) => setState(() => currentLanguage = language));
+    });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         textListenToMouse(
-          true,
-          Languages.english
-          // ref.watch(languageProvider).language,
+          currentLanguage.isEnglish,
+          Languages.english,
         ),
         Container(
           margin: sizes.smallMargins.end,
@@ -67,9 +71,8 @@ class _ButtonLargeHeaderWidget extends ConsumerState<LanguageSwitchWidget> with 
         Container(
           margin: sizes.mediumMargins.end,
           child: textListenToMouse(
-            false,
+            currentLanguage.isFrench,
             Languages.french,
-            // ref.watch(languageProvider).language,
           ),
         )
       ],
@@ -81,7 +84,9 @@ class _ButtonLargeHeaderWidget extends ConsumerState<LanguageSwitchWidget> with 
     onEnter: (_) => setHover(true, language),
     onExit: (_) => setHover(false, language),
     child: InkWell(
-      onTap: () {},
+      onTap: () {
+        ref.read(languageProvider.notifier).setLanguage(language);
+      },
       child: Container(
         margin: sizes.smallMargins.end,
         child: CustomPaint(
