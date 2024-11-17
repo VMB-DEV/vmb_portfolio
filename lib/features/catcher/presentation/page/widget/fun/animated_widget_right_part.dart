@@ -22,6 +22,7 @@ class AnimatedCatcherRightPartWidget extends ConsumerStatefulWidget {
 
 class _AnimatedCatcherRightPartWidgetState extends ConsumerState<AnimatedCatcherRightPartWidget> with SingleTickerProviderStateMixin {
   final Duration animationSlideDuration = const Duration(milliseconds: 500);
+  // final Duration animationSlideDuration = const Duration(milliseconds: 1500);
   late AnimationController _controllerSlide;
   late Animation<double> _iconAnimatedMovement;
   late Animation<double> _iconAnimatedAppearance;
@@ -54,6 +55,7 @@ class _AnimatedCatcherRightPartWidgetState extends ConsumerState<AnimatedCatcher
       CurvedAnimation(
         parent: _controllerSlide,
         curve: const Interval( 0.0, 1.0, curve: Cubic(0.21, 0.79, 0.7, 0.32), ),
+        // curve: const Interval( 0.0, 1.0, curve: Curves.linear, ),
       ),
     );
     _iconAnimatedDisappearance = Tween<double>( begin: 0.0, end: 1.0, ).animate(
@@ -129,9 +131,6 @@ class _AnimatedCatcherRightPartWidgetState extends ConsumerState<AnimatedCatcher
     ],
   );
 
-  // Widget get _mySelf => RawImage(
-  //   image: ref.watch(catcherComicPicProvider).requireValue.comicPic.requireValue,
-  // );
   Widget get _mySelf =>
       ref.watch(catcherComicPicProvider).when(
     data: (state) => state.comicPic.when(
