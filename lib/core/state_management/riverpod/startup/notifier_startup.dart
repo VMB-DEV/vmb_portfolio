@@ -7,7 +7,6 @@ import '../../../../features/catcher/presentation/state_management/icons/provide
 import '../../../../features/catcher/presentation/state_management/text_icon_link/provider_catcher_url.dart';
 import '../../../../features/contact/presentation/state_management/provider_contact_links.dart';
 import '../../../../features/projects/presentation/state_management/provider_project_entities.dart';
-import '../../../utils/logs.dart';
 import '../language/provider_language.dart';
 
 class StartupNotifier extends Notifier<StartupState> {
@@ -24,10 +23,10 @@ class StartupNotifier extends Notifier<StartupState> {
       await ref.read(sharedPrefProvider.future);
 
       final languageState = await ref.read(languageProvider.future);
-      await languageState.language.value; // Ensure language is loaded
+      await languageState.language.value;
 
       final stringsState = await ref.read(catcherStringsNotifierProvider.future);
-      await stringsState.entity.value; // Ensure strings are loaded
+      await stringsState.entity.value;
 
       await Future.wait([
         ref.read(catcherIconsProvider.future),
@@ -35,7 +34,6 @@ class StartupNotifier extends Notifier<StartupState> {
         ref.read(catcherComicPicProvider.future),
         ref.read(contactLinkProvider.future),
         ref.read(projectEntitiesNotifierProvider.future),
-        // ref.read(catcherStringsNotifierProvider.future),
       ]);
 
       state = const StartupState(loaded: AsyncValue.data(true));

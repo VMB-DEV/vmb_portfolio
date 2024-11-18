@@ -15,4 +15,6 @@ class CatcherData {
     Languages.english: "Find me here : ",
     Languages.french: "Retrouvez moi ici : ",
   };
+
+  final String specialisation = "Mobile  /  Web  /  Crossplatform  /  Full Stack developper";
 }

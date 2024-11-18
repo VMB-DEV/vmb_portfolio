@@ -15,6 +15,7 @@ class CatcherStringsRepositoryImpl extends CatcherStringsRepository {
       threeLinesPresentation: data.threeLinesPresentation[language]!,
       mainTechno: data.mainTechno[language]!,
       linkPrefix: data.linkPrefix[language]!,
+      specialisation: data.specialisation,
     );
   }
 }

@@ -1,19 +1,14 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
-import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
-import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
 import 'package:vmb_portfolio/features/catcher/domain/entity/entity_catcher_strings.dart';
 import 'package:vmb_portfolio/features/catcher/domain/entity/entity_icon_text_link.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/widget/fun/animated_widget_right_part.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/state_management/strings/provider_catcher_strings.dart';
-
-import '../../../../core/data/values/languages.dart';
 import '../../../../core/utils/logs.dart';
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
@@ -129,12 +124,11 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   Widget get _techno => _box(
     child: Text(
-      "Dart  -  Kotlin  -  JavaScript  -  Python  -  C",
+      stringsEntity.mainTechno,
       textAlign: TextAlign.start,
       style: GoogleFonts.rajdhani(
         fontWeight: FontWeight.w600,
         color: MyColors.visibleText,
-        // fontSize: sizes.specialisationFontSize,
         fontSize: sizes.fonts.medium,
       ),
     ),
@@ -142,7 +136,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   Widget get _specialisation => _box(
     child: Text(
-      "Mobile  /  Web  /  Crossplatform  /  Full Stack developper",
+      stringsEntity.specialisation,
       textAlign: TextAlign.start,
       style: GoogleFonts.rajdhani(
         fontWeight: FontWeight.w600,
@@ -158,7 +152,6 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     strokeJoin: StrokeJoin.bevel,
     child: Text(
       stringsEntity.threeLinesPresentation,
-      // "Hello,\nI'm Valentin.\nApplication developper.",
       textAlign: TextAlign.start,
       style: _catchPhraseStyle
     ),
