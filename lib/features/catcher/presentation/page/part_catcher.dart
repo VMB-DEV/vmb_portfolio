@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
-import 'package:vmb_portfolio/features/catcher/domain/entity/entity_catcher_strings.dart';
+import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
+import 'package:vmb_portfolio/features/catcher/data/values/data_catcher.dart';
 import 'package:vmb_portfolio/features/catcher/domain/entity/entity_icon_text_link.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/widget/fun/animated_widget_right_part.dart';
-import 'package:vmb_portfolio/features/catcher/presentation/state_management/strings/provider_catcher_strings.dart';
-import '../../../../core/utils/logs.dart';
+import '../../../../core/data/values/languages.dart';
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
 class CatcherPart extends ConsumerStatefulWidget {
@@ -26,7 +26,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
   final duration = const Duration(milliseconds: 200);
   late AnimationController _controller;
   late Animation<double> animationValue;
-  CatcherStringsEntity get stringsEntity => ref.watch(catcherStringsNotifierProvider).requireValue.entity.requireValue;
+  final stringsData = CatcherData();
+  Languages get language => ref.watch(languageProvider).requireValue.language.requireValue;
   IconTextLinkEntity get githubLink => ref.watch(catcherIconTextLinkProvider).requireValue.github.requireValue;
   IconTextLinkEntity get linkedinLink => ref.watch(catcherIconTextLinkProvider).requireValue.linkedin.requireValue;
 
@@ -49,11 +50,9 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    Log.blue('_CatcherPartState.build - ');
     return Container(
       key: widget.navBarKey,
       margin: widget.sizes.topPartMargin.add(widget.sizes.leftPartMargin),
-      // constraints: widget.sizes.box,
       child: widget.sizes.isCompact ? _compactLayout : _largeLayout,
     );
   }
@@ -104,7 +103,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     child: Row(
       children: [
         Text(
-          stringsEntity.linkPrefix,
+          stringsData.linkPrefix[language]!,
           style: GoogleFonts.rajdhani(
             color: MyColors.visibleText,
             fontSize: sizes.fonts.medium,
@@ -124,7 +123,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   Widget get _techno => _box(
     child: Text(
-      stringsEntity.mainTechno,
+      stringsData.mainTechno[language]!,
       textAlign: TextAlign.start,
       style: GoogleFonts.rajdhani(
         fontWeight: FontWeight.w600,
@@ -136,7 +135,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   Widget get _specialisation => _box(
     child: Text(
-      stringsEntity.specialisation,
+      stringsData.specialisation,
       textAlign: TextAlign.start,
       style: GoogleFonts.rajdhani(
         fontWeight: FontWeight.w600,
@@ -151,7 +150,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     strokeWidth: sizes.catchPhraseStrokeWidth,
     strokeJoin: StrokeJoin.bevel,
     child: Text(
-      stringsEntity.threeLinesPresentation,
+        // stringsEntity.threeLinesPresentation,
+      stringsData.threeLinesPresentation[language]!,
       textAlign: TextAlign.start,
       style: _catchPhraseStyle
     ),
@@ -161,7 +161,6 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     return GoogleFonts.rajdhani(
       fontWeight: FontWeight.w700,
       color: MyColors.visibleText,
-      // fontSize: sizes.catchPhraseFontSize,
       fontSize: sizes.isCompact ? sizes.fonts.big : sizes.fonts.extra,
       shadows: [
         Shadow(

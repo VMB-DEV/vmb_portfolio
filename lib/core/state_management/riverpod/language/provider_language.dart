@@ -5,7 +5,7 @@ import 'package:vmb_portfolio/core/data/repository/language_repository.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/notifier_language.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/state_language.dart';
 
-final sharedPrefProvider = FutureProvider<SharedPreferences>((ref) async {
+final sharedPrefProvider = FutureProvider<SharedPreferences>((_) async {
   return await SharedPreferences.getInstance();
 });
 
