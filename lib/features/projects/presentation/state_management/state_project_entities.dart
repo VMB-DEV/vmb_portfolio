@@ -3,11 +3,11 @@ import 'package:vmb_portfolio/features/projects/domain/entity/entity_project.dar
 
 class ProjectEntitiesState {
   final AsyncValue<List<ProjectEntity>> projects;
-  final bool isLoading;
+  bool isLoading;
 
   ProjectEntitiesState({
     required this.projects,
-    this.isLoading = false,
+    this.isLoading = true,
   });
 
   ProjectEntitiesState copyWith({

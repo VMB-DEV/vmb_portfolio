@@ -5,6 +5,7 @@ import 'package:vmb_portfolio/core/extensions/list.dart';
 import 'package:vmb_portfolio/core/extensions/map.dart';
 import 'package:vmb_portfolio/features/header/domain/entity/entity_part.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/menu/large/widget_button_large_header.dart';
+import 'package:vmb_portfolio/features/header/presentation/page/menu/large/widget_switch_langugae.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
 
 import '../../../../../../core/state_management/riverpod/scroll/provider_scroll.dart';
@@ -30,6 +31,7 @@ class LargeMenuWidget extends ConsumerWidget {
         index: PartEntity.resume.index,
         onTap: openResume(ref)
       ),
+      LanguageSwitchWidget(sizes: sizes),
     ]
     ,
   );

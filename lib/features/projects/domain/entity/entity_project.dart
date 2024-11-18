@@ -1,13 +1,14 @@
 import 'dart:ui';
 
+import '../../../../core/data/values/languages.dart';
 import '../../../catcher/domain/entity/entity_icon_text_link.dart';
 import '../../Project.dart';
 import '../../data/model/model_project.dart';
 
 class ProjectEntity {
   final Project type;
-  final String concept;
-  final String description;
+  final Map<Languages, String> concept;
+  final Map<Languages, String> description;
   final String techno;
   final Image icon;
   final List<IconTextLinkEntity> links;

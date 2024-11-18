@@ -3,9 +3,9 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
-import 'package:vmb_portfolio/core/extensions/list.dart';
 import 'package:vmb_portfolio/core/extensions/map.dart';
 import 'package:vmb_portfolio/core/presentation/text/widget_animated_text.dart';
+import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
 import 'package:vmb_portfolio/features/header/domain/entity/entity_part.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/menu/compact/painter_compact_menu.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
@@ -137,13 +137,17 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
     padding: EdgeInsetsDirectional.only(top: sizes.rightPartCompactMenuDelta),
     child: Column(
       children: [
-        ...PartEntity.names.withoutLast.mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
-        clickablePart(PartEntity.resume.name, PartEntity.values.indexOf(PartEntity.resume), openResume)
-        // clickablePart(text)
+        ...PartEntity.names.sublist(0, 3).mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
+        clickablePart(PartEntity.resume.name, PartEntity.values.indexOf(PartEntity.resume), openResume),
+        clickablePart("en / fr", PartEntity.values.indexOf(PartEntity.language), switchLanguage)
       ],
     ),
   );
 
+  VoidCallback get switchLanguage => () {
+    ref.read(languageProvider.notifier).switchLanguage();
+    _menuController.reverse();
+  };
   VoidCallback get openResume => () {
     launchUrl(Uri.parse(ref.watch(headerUrlNotifierProvider).build()));
   };

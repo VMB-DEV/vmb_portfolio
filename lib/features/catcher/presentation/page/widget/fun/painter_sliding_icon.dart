@@ -1,5 +1,7 @@
+import 'dart:math';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import '../../sizes_catcher.dart';
 
 class SlidingIconPainter extends CustomPainter {
@@ -23,7 +25,11 @@ class SlidingIconPainter extends CustomPainter {
     final iconSize = sizes.iconSize + (80 * animationMovement.value);
     final imageSize = Size(iconSize, iconSize);
     final xOffset = sizes.catcherAnimationXTravel * animationMovement.value;
-    final yOffset = sizes.catcherAnimationYTravel * animationMovement.value;
+    // final yOffset = sizes.catcherAnimationYTravel * animationMovement.value;
+    final yOffset = animationMovement.value < 0.6
+        ? sizes.catcherAnimationYTravel * animationMovement.value
+        : sizes.catcherAnimationYTravel * animationMovement.value + (animationMovement.value - 0.6) * sizes.screen.W * 0.1
+    ;
     final left = sizes.catcherAnimationLeft + xOffset;
     final top = sizes.catcherAnimationTop + yOffset;
     final rect = Rect.fromLTWH(left, top, iconSize, iconSize);

@@ -6,6 +6,7 @@ import 'package:vmb_portfolio/features/projects/presentation/page/widget_project
 import 'package:vmb_portfolio/features/projects/presentation/state_management/provider_project_entities.dart';
 
 import '../../../../core/constants/custom_colors.dart';
+import '../../../../core/utils/logs.dart';
 import '../../Project.dart';
 
 class ProjectPart extends ConsumerWidget {
