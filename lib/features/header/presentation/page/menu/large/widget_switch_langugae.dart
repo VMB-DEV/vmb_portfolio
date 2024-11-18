@@ -55,7 +55,7 @@ class _LanguageSwitchWidget extends ConsumerState<LanguageSwitchWidget> with Sin
   @override
   Widget build(BuildContext context) {
     ref.listen(languageProvider, (previous, next) {
-      next.whenData((language) => setState(() => currentLanguage = language));
+      next.whenData((state) => setState(() => currentLanguage = state.language.requireValue));
     });
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

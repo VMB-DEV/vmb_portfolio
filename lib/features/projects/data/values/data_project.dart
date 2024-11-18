@@ -46,7 +46,7 @@ enum ProjectData {
       Languages.french: "Application web et de bureau. Un snake des plus classique jouable à deux en local",
     },
     description: "Game developed at the end of a 2 weeks bootcamp on python in Yutopia. Mainly used the pygame engine to run it and a structured architecture for an easy maintenance. Hosted on the github service.",
-    techno:  "Python Pygame Pygbag",
+    techno:  "Python, Pygame, Pygbag",
     icon: PictureType.snakeIcon,
     assets: [
       PictureType.snakeScreenshot1,
@@ -64,7 +64,7 @@ enum ProjectData {
       Languages.french: "Application mobile native android. Inspiré de DUAL, le jeu a pour but est de détruire le vaisseau adverse connecté en wifi",
     },
     description: "Game developed in Kotlin with the Jetpack toolkit and flows to handle events. Two devices facing each other connected through wifi",
-    techno:  "Kotlin Jetpack Compose",
+    techno:  "Kotlin, Jetpack, Compose",
     icon: PictureType.spaceWarsIcon,
     assets: [
       PictureType.spaceWarsScreenshot1,

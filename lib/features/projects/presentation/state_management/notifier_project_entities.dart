@@ -20,7 +20,7 @@ class ProjectEntitiesNotifier extends AsyncNotifier<ProjectEntitiesState> {
 
       return ProjectEntitiesState(
         projects: AsyncValue.data(results),
-      );
+      )..isLoading = false;
     } catch (e, stack) {
       return ProjectEntitiesState(
         projects: AsyncValue.error(e, stack),

@@ -3,8 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vmb_portfolio/core/data/data_source/local_data_source_language.dart';
 import 'package:vmb_portfolio/core/data/repository/language_repository.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/notifier_language.dart';
-
-import '../../../data/values/languages.dart';
+import 'package:vmb_portfolio/core/state_management/riverpod/language/state_language.dart';
 
 final sharedPrefProvider = FutureProvider<SharedPreferences>((ref) async {
   return await SharedPreferences.getInstance();
@@ -20,6 +19,6 @@ final languageRepoProvider = FutureProvider<LanguageRepository>((ref) async {
   return LanguageRepository(localDataSource: localDataSource);
 });
 
-final languageProvider = StateNotifierProvider<LanguageNotifier, AsyncValue<Languages>>((ref) {
-  return LanguageNotifier(ref);
+final languageProvider = AsyncNotifierProvider<LanguageNotifier, LanguageState>(() {
+  return LanguageNotifier();
 });

@@ -30,13 +30,9 @@ class ProjectWidget extends ConsumerStatefulWidget {
 class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
   ProjectsSizes get _sizes => widget.sizes;
   ProjectEntity get _entity => widget.entity;
-  late Languages _currentLanguage;
-  
+
   @override
   Widget build(BuildContext context) {
-    ref.listen(languageProvider, (previous, next) {
-      next.whenData((language) => setState(() => _currentLanguage = language));
-    });
     return Container(
       margin: _sizes.leftPartMargin.add(_sizes.mediumMargins.bot),
       child: Column(
@@ -130,7 +126,9 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     ),
   );
 
-  Widget get _concept => projectText(text: _entity.concept[_currentLanguage]!);
+  Widget get _concept => projectText(text: _entity.concept[language]!);
+
+  Languages get language => ref.watch(languageProvider).requireValue.language.requireValue;
 
   Widget get _techno => projectText(text: _entity.techno);
 
