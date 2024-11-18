@@ -8,7 +8,7 @@ import '../../data/model/model_project.dart';
 class ProjectEntity {
   final Project type;
   final Map<Languages, String> concept;
-  final String description;
+  final Map<Languages, String> description;
   final String techno;
   final Image icon;
   final List<IconTextLinkEntity> links;

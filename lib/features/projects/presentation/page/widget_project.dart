@@ -6,6 +6,7 @@ import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/data/values/languages.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
+import 'package:vmb_portfolio/core/presentation/text/widget_animated_text.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
 import 'package:vmb_portfolio/features/projects/domain/entity/entity_project.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/painter_title_delimiter.dart';
@@ -183,7 +184,9 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     ),
   );
 
-  Widget projectText({required String text}) => Container(
+
+  Widget projectText({required String text}) => AnimatedContainer(
+    duration: Duration(milliseconds: 500),
     margin: _sizes.smallMargins.top,
     child: Text(
       text,

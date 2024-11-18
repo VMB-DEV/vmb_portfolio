@@ -7,7 +7,7 @@ import '../../Project.dart';
 class ProjectModel {
   final Project type;
   final Map<Languages, String> concept;
-  final String description;
+  final Map<Languages, String> description;
   final String techno;
   final Image icon;
   final List<(Image, UrlType)> links;
