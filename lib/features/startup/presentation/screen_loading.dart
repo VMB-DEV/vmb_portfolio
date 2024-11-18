@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vmb_portfolio/core/presentation/background/widget_background.dart';
 import 'package:vmb_portfolio/core/utils/contruction.dart';
 
 class LoadingScreen extends StatelessWidget {
@@ -6,7 +7,7 @@ class LoadingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const ToConstruct(str: "SOME LOADING SCREEN"));
+    return MaterialApp(home: AppBackground(child: const ToConstruct(str: "SOME LOADING SCREEN")));
     // CircularProgressIndicator();
   }
 }
