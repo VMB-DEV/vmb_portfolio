@@ -23,7 +23,6 @@ class StartUp extends ConsumerStatefulWidget {
 class _StartupState extends ConsumerState<StartUp> {
   bool appLoaded = false;
 
-
   @override
   Widget build(BuildContext context) {
     if (appLoaded) { return app; }

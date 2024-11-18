@@ -10,6 +10,7 @@ import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.d
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/widget/fun/animated_widget_right_part.dart';
 import '../../../../core/data/values/languages.dart';
+import '../../../../core/presentation/text/widget_animated_text.dart';
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
 class CatcherPart extends ConsumerStatefulWidget {
@@ -23,15 +24,18 @@ class CatcherPart extends ConsumerStatefulWidget {
 
 class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProviderStateMixin {
   bool onHover = false;
-  final duration = const Duration(milliseconds: 200);
+  final duration = const Duration(milliseconds: 500);
   late AnimationController _controller;
-  late Animation<double> animationValue;
+  late Animation<double> _animationValue;
   final stringsData = CatcherData();
   Languages get language => ref.watch(languageProvider).requireValue.language.requireValue;
   IconTextLinkEntity get githubLink => ref.watch(catcherIconTextLinkProvider).requireValue.github.requireValue;
   IconTextLinkEntity get linkedinLink => ref.watch(catcherIconTextLinkProvider).requireValue.linkedin.requireValue;
+  late Languages _currentLanguage;
+
 
   CatcherSizes get sizes => widget.sizes;
+
 
   @override
   void initState() {
@@ -42,14 +46,27 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
       vsync: this,
     );
 
-    animationValue = Tween<double>(
+    _animationValue = Tween<double>(
       begin: 0,
       end: 1,
     ).animate(_controller);
   }
 
+  Languages? _previousLanguage;
+
   @override
   Widget build(BuildContext context) {
+    if (_previousLanguage != null && _previousLanguage != language) {
+      _controller.reverse().whenComplete(() {
+        _controller.forward();
+        setState(() => _currentLanguage = language);
+      });
+    } else if (_previousLanguage == null) {
+      _currentLanguage = language;
+      _controller.forward(from: 0);
+    }
+    _previousLanguage = language;
+
     return Container(
       key: widget.navBarKey,
       margin: widget.sizes.topPartMargin.add(widget.sizes.leftPartMargin),
@@ -68,7 +85,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _threeLinePresentation,
+            // _threeLinePresentation,
+            _fourLinePresentation,
             _specialisation,
             _techno,
             _links
@@ -89,7 +107,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _threeLinePresentation,
+            // _threeLinePresentation,
+            _fourLinePresentation,
             _specialisation,
             _techno,
             _links,
@@ -102,12 +121,12 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
   Widget get _links => _box(
     child: Row(
       children: [
-        Text(
-          stringsData.linkPrefix[language]!,
-          style: GoogleFonts.rajdhani(
-            color: MyColors.visibleText,
-            fontSize: sizes.fonts.medium,
-          ),
+        AnimatedTextWidget(
+          text: stringsData.linkPrefix[_currentLanguage]!,
+          fontSize: sizes.fonts.medium,
+          fontWeight: FontWeight.w500,
+          animation: _animationValue,
+          listenable: _controller,
         ),
         AnimatedLinkWidget(
           sizes: sizes,
@@ -122,40 +141,46 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
   );
 
   Widget get _techno => _box(
-    child: Text(
-      stringsData.mainTechno[language]!,
-      textAlign: TextAlign.start,
-      style: GoogleFonts.rajdhani(
-        fontWeight: FontWeight.w600,
-        color: MyColors.visibleText,
-        fontSize: sizes.fonts.medium,
-      ),
+    child: AnimatedTextWidget(
+      text: stringsData.mainTechno[_currentLanguage]!,
+      animation: _animationValue,
+      listenable: _controller,
+      fontWeight: FontWeight.w600,
+      fontSize: sizes.fonts.medium,
     ),
   );
 
   Widget get _specialisation => _box(
-    child: Text(
-      stringsData.specialisation,
-      textAlign: TextAlign.start,
-      style: GoogleFonts.rajdhani(
-        fontWeight: FontWeight.w600,
-        color: MyColors.visibleText,
-        fontSize: sizes.fonts.medium,
-      ),
+    child: AnimatedTextWidget(
+      text: stringsData.specialisation,
+      animation: _animationValue,
+      listenable: _controller,
+      fontWeight: FontWeight.w600,
+      fontSize: sizes.fonts.medium,
     ),
   );
 
-  Widget get _threeLinePresentation => BorderedText(
-    strokeColor: MyColors.bigTextBorders,
-    strokeWidth: sizes.catchPhraseStrokeWidth,
-    strokeJoin: StrokeJoin.bevel,
-    child: Text(
-        // stringsEntity.threeLinesPresentation,
-      stringsData.threeLinesPresentation[language]!,
-      textAlign: TextAlign.start,
-      style: _catchPhraseStyle
+  Widget get _fourLinePresentation => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: stringsData.threeLinesPresentation[_currentLanguage]!.split('\n').map((string)
+    => AnimatedTextWidget(
+      text: string,
+      fontSize: sizes.isCompact ? sizes.fonts.big : sizes.fonts.extra,
+      fontWeight: FontWeight.w700,
+      animation: _animationValue,
+      listenable: _controller,
+      textWidget: BorderedText(
+        strokeColor: MyColors.bigTextBorders,
+        strokeWidth: sizes.catchPhraseStrokeWidth,
+        strokeJoin: StrokeJoin.bevel,
+        child: Text(
+            string,
+            textAlign: TextAlign.start,
+            style: _catchPhraseStyle
+        ),
+      ),
     ),
-  );
+    ).toList(),);
 
   TextStyle get _catchPhraseStyle {
     return GoogleFonts.rajdhani(
