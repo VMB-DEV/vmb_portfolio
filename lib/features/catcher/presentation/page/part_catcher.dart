@@ -5,10 +5,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
+import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
+import 'package:vmb_portfolio/features/catcher/domain/entity/entity_catcher_strings.dart';
+import 'package:vmb_portfolio/features/catcher/domain/entity/entity_icon_text_link.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/sizes_catcher.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
 import 'package:vmb_portfolio/features/catcher/presentation/page/widget/fun/animated_widget_right_part.dart';
+import 'package:vmb_portfolio/features/catcher/presentation/state_management/strings/provider_catcher_strings.dart';
 
+import '../../../../core/data/values/languages.dart';
+import '../../../../core/utils/logs.dart';
 import '../state_management/text_icon_link/provider_catcher_url.dart';
 
 class CatcherPart extends ConsumerStatefulWidget {
@@ -25,6 +31,9 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
   final duration = const Duration(milliseconds: 200);
   late AnimationController _controller;
   late Animation<double> animationValue;
+  CatcherStringsEntity get stringsEntity => ref.watch(catcherStringsNotifierProvider).requireValue.entity.requireValue;
+  IconTextLinkEntity get githubLink => ref.watch(catcherIconTextLinkProvider).requireValue.github.requireValue;
+  IconTextLinkEntity get linkedinLink => ref.watch(catcherIconTextLinkProvider).requireValue.linkedin.requireValue;
 
   CatcherSizes get sizes => widget.sizes;
 
@@ -45,6 +54,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
+    Log.blue('_CatcherPartState.build - ');
     return Container(
       key: widget.navBarKey,
       margin: widget.sizes.topPartMargin.add(widget.sizes.leftPartMargin),
@@ -99,36 +109,19 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     child: Row(
       children: [
         Text(
-          "Find me here : ",
+          stringsEntity.linkPrefix,
           style: GoogleFonts.rajdhani(
             color: MyColors.visibleText,
             fontSize: sizes.fonts.medium,
           ),
         ),
-        ref.watch(catcherIconTextLinkProvider).when(
-          data: (state) => state.github.when(
-            data: (entity) => AnimatedLinkWidget(
-              sizes: sizes,
-              entity: entity,
-            ),
-            // error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
-            error: (Object error, StackTrace stackTrace) => Text(stackTrace.toString(), style: TextStyle(color: Colors.white),),
-            loading: () => const CircularProgressIndicator(),
-          ),
-          error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
-          loading: () => const CircularProgressIndicator(),
+        AnimatedLinkWidget(
+          sizes: sizes,
+          entity: githubLink,
         ),
-        ref.watch(catcherIconTextLinkProvider).when(
-          data: (state) => state.linkedin.when(
-            data: (entity) => AnimatedLinkWidget(
-              sizes: sizes,
-              entity: entity,
-            ),
-            error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
-            loading: () => const CircularProgressIndicator(),
-          ),
-          error: (Object error, StackTrace stackTrace) => const Icon(Icons.error, color: MyColors.error,),
-          loading: () => const CircularProgressIndicator(),
+        AnimatedLinkWidget(
+          sizes: sizes,
+          entity: linkedinLink,
         ),
       ],
     ),
@@ -164,7 +157,8 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     strokeWidth: sizes.catchPhraseStrokeWidth,
     strokeJoin: StrokeJoin.bevel,
     child: Text(
-      "Hello,\nI'm Valentin.\nApplication developper.",
+      stringsEntity.threeLinesPresentation,
+      // "Hello,\nI'm Valentin.\nApplication developper.",
       textAlign: TextAlign.start,
       style: _catchPhraseStyle
     ),

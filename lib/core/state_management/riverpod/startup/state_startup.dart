@@ -1,22 +1,15 @@
-sealed class StartupState {
-  const StartupState();
-}
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// class StartupInitial extends StartupState {
-//   const StartupInitial();
-// }
+class StartupState {
+  final AsyncValue<bool> loaded;
 
-class StartupLoading extends StartupState {
-  const StartupLoading();
-}
+  const StartupState({this.loaded = const AsyncValue.loading()});
 
-class StartupComplete extends StartupState {
-  const StartupComplete();
-}
-
-class StartupError extends StartupState {
-  final Object error;
-  final StackTrace stackTrace;
-
-  const StartupError(this.error, this.stackTrace);
+  StartupState copyWith({
+    AsyncValue<bool>? loaded,
+  }) {
+    return StartupState(
+      loaded: loaded ?? this.loaded,
+    );
+  }
 }

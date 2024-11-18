@@ -21,13 +21,14 @@ class AppStartUp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: AppBackground(
-          child: switch (startupState) {
-            StartupLoading() => const LoadingScreen(),
-            StartupComplete() => const Portfolio(),
-            StartupError() => ErrorScreen(
-              error: startupState.error,
-            ),
-          },
+          child: startupState.loaded.isLoading ? const LoadingScreen() : const Portfolio(),
+          // child: switch (startupState) {
+          //   StartupLoading() => const LoadingScreen(),
+          //   StartupComplete() => const Portfolio(),
+          //   StartupError() => ErrorScreen(
+          //     error: startupState.error,
+          //   ),
+          // },
         ),
       ),
     );
