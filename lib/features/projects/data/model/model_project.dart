@@ -8,6 +8,7 @@ class ProjectModel {
   final Project type;
   final Map<Languages, String> concept;
   final Map<Languages, String> description;
+  final Map<Languages, String> descriptionButton;
   final String techno;
   final Image icon;
   final List<(Image, UrlType)> links;
@@ -17,6 +18,7 @@ class ProjectModel {
     required this.type,
     required this.concept,
     required this.description,
+    required this.descriptionButton,
     required this.techno,
     required this.icon,
     required this.links,

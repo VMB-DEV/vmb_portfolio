@@ -5,12 +5,16 @@ class CatcherStringsEntity {
   final String mainTechno;
   final String linkPrefix;
   final String specialisation;
+  final String description;
+  final String descriptionButton;
 
   CatcherStringsEntity({
     required this.threeLinesPresentation,
     required this.mainTechno,
     required this.linkPrefix,
     required this.specialisation,
+    required this.description,
+    required this.descriptionButton,
   });
 
   factory CatcherStringsEntity.from({required CatcherStringsModel model}) {
@@ -18,7 +22,9 @@ class CatcherStringsEntity {
       threeLinesPresentation: model.threeLinesPresentation,
       mainTechno: model.mainTechno,
       linkPrefix: model.linkPrefix,
-      specialisation: model.specialisation
+      specialisation: model.specialisation,
+      description: model.description,
+      descriptionButton: model.descriptionButton,
     );
   }
 }

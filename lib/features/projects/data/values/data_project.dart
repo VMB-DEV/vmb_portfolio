@@ -93,6 +93,7 @@ enum ProjectData {
   final PictureType icon;
   final List<PictureType> assets;
   final List<(PictureType, UrlType)> links;
+  final Map<Languages, String> descriptionButton;
   const ProjectData({
     required this.concept,
     required this.description,
@@ -100,5 +101,9 @@ enum ProjectData {
     required this.icon,
     required this.assets,
     required this.links,
+    this.descriptionButton = const {
+      Languages.english: "  Click to learn more  ",
+      Languages.french: "  Cliquez ici pour en savoir plus  ",
+    },
   });
 }

@@ -13,6 +13,7 @@ class AnimatedTextWidget extends StatefulWidget {
   final Listenable listenable;
   final bool reverseDirection;
   final Widget? textWidget;
+  final double? textMaxWidth;
   const AnimatedTextWidget({
     required this.text,
     this.textSize,
@@ -22,6 +23,7 @@ class AnimatedTextWidget extends StatefulWidget {
     required this.listenable,
     this.reverseDirection = false,
     this.textWidget,
+    this.textMaxWidth,
     super.key,
   });
 
@@ -49,15 +51,14 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
       CurvedAnimation(
         parent: widget.animation,
         curve: const Interval( 0.65, 1.0,  curve: Curves.easeInOut, ),
-        reverseCurve: const Interval(0.1, 0.5, curve: Curves.easeInOut),
+        reverseCurve: const Interval(0.0, 1.0, curve: Curves.easeInOut),
       ),
     );
     _textAnimationDisplay = Tween<double>( begin: 0.0, end: 1.0, ).animate(
       CurvedAnimation(
         parent: widget.animation,
-        curve: const Interval( 0.6, 1.0, curve: Curves.slowMiddle, ),
-        reverseCurve: const Interval(0.3, 0.5),
-        // reverseCurve: const Interval(0.0, 0.2),
+        curve: const Interval( 0.7, 1.0, curve: Curves.slowMiddle, ),
+        reverseCurve: const Interval(0.5, 0.7),
       ),
     );
     super.initState();
@@ -79,20 +80,23 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
   @override
   Widget build(BuildContext context) {
     _textSize = widget.textSize != null ? widget.textSize! : getTextSize(widget.text);
+
     return AnimatedBuilder(
       animation: widget.listenable,
       child: CustomPaint(
-        child: widget.textWidget ?? Text(
-          widget.text,
-          style: GoogleFonts.rajdhani(
+        child: widget.textWidget ?? RichText(
+          text: TextSpan(
+          text: widget.text,
+          style: TextStyle(
+            fontFamily: 'Rajdhani',
             fontWeight: widget.fontWeight,
-            color: MyColors.visibleText,
             fontSize: widget.fontSize,
-            // backgroundColor: Colors.green.withOpacity(0.1)
+            color: MyColors.visibleText,
           ),
-        ),
+        ),),
       ),
       builder: (ctx, child) {
+        final lineMetrics = getLinesMetrics();
         return RepaintBoundary(
           child: CustomPaint(
             painter: AnimatedTextPainter(
@@ -105,6 +109,8 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
               textSize: _textSize,
               repaint: widget.listenable,
               invertDirection: widget.reverseDirection,
+              textMaxWidth: widget.textMaxWidth,
+              lineMetricsList: lineMetrics,
             ),
             child: Opacity(
               opacity: _textAnimationDisplay.value,
@@ -114,5 +120,28 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget> {
         );
       },
     );
+  }
+
+
+  List<LineMetrics> getLinesMetrics() {
+    final textSpan = TextSpan(
+      text: widget.text,
+      style: TextStyle(
+        fontFamily: 'Rajdhani',
+        fontWeight: widget.fontWeight,
+        fontSize: widget.fontSize,
+      ),
+    );
+
+    final textPainter = TextPainter(
+      text: textSpan,
+      textDirection: TextDirection.ltr,
+    );
+
+    textPainter.layout(maxWidth: widget.textMaxWidth ?? double.infinity);
+
+    final lineMetrics = textPainter.computeLineMetrics();
+
+    return lineMetrics;
   }
 }

@@ -39,6 +39,8 @@ class CatcherSizes extends Sizes {
   late double _iconSize;
   double get iconSize => _iconSize;
   BoxConstraints get catcherAnimationCompactBox => _catcherAnimationCompactBox;
+  late double _descriptionWidth;
+  double get descriptionWidth => _descriptionWidth;
   void initAnimation() {
     _iconSize = isCompact ? screen.W * 0.08 : screen.W * 0.05;
     _catcherAnimationLeftAt = screen.W * 0.4;
@@ -65,6 +67,7 @@ class CatcherSizes extends Sizes {
     _catchPhraseTopShadowBlurRadius = (box.H * 0.005).clamp(0.1, 2);
     _catchPhraseBotShadowBlurRadius = (box.H * 0.003).clamp(0.002, 3);
     _catchPhraseStrokeWidth = box.W * 0.001;
+    _descriptionWidth = isCompact ? screen.W * 0.7 : screen.W * 0.4;
   }
   double get specialisationFontSize => _specialisationFontSize;
   double get catchPhraseFontSize => _catchPhraseFontSize;
