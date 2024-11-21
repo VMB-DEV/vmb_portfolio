@@ -33,13 +33,13 @@ import 'package:vmb_portfolio/core/state_management/riverpod/pictures/notifier_p
 final pictureLocalDataSourceProvider = Provider((ref) => PictureLocalDataSourceImpl());
 
 // Provider for the repository
-final pictureRepositoryProvider = Provider((ref) {
-  final localDataSource = ref.watch(pictureLocalDataSourceProvider);
-  return PictureRepository(pictureLocalDataSource: localDataSource);
-});
+// final pictureRepositoryProvider = Provider((ref) {
+//   final localDataSource = ref.watch(pictureLocalDataSourceProvider);
+//   return PictureRepository(pictureLocalDataSource: localDataSource);
+// });
 
 // StateNotifierProvider to manage image loading
-final pictureProvider = StateNotifierProvider<PicturesNotifier, AsyncValue<List<Object>>>((ref) {
-  final repository = ref.watch(pictureRepositoryProvider);
-  return PicturesNotifier(repo: repository);
-});
+// final pictureProvider = StateNotifierProvider<PicturesNotifier, AsyncValue<List<Object>>>((ref) {
+//   final repository = ref.watch(pictureRepositoryProvider);
+//   return PicturesNotifier(repo: repository);
+// });

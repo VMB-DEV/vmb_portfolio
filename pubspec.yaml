@@ -49,5 +49,5 @@ flutter:
           weight: 600
         - asset: assets/fonts/Rajdhani-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Rajdhani-Regular.ttf
+        - asset: assets/fonts/Rajdhani-Medium.ttf
           weight: 400

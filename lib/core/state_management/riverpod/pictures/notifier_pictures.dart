@@ -20,30 +20,30 @@ import 'package:vmb_portfolio/features/catcher/domain/usecase/use_case_get_catch
 // }
 
 
-class PicturesNotifier extends StateNotifier<AsyncValue<List<Object>>> {
-  final PictureRepository repo;
-
-  PicturesNotifier({required this.repo}) : super(const AsyncValue.loading()) {
-    _loadPic();
-  }
-
-  Future<void> _loadPic() async {
-    print("Loading picture...");
-    state = const AsyncValue.loading();
-    final List<Object> results = await Future.wait([
-      repo.pictureLocalDataSource.getImageUI(PictureType.spaceWarsIcon.path,),
-      repo.pictureLocalDataSource.getAssetImage(PictureType.snakeIcon.path),
-    ]);
-    try {
-      state = AsyncValue.data(results);
-      // final image = await repo.pictureLocalDataSource.getImageUI(
-      //   PictureType.spaceWarsIcon.path,
-      // );
-      print("Image loaded successfully");
-      // state = AsyncValue.data(image);
-    } catch (e, stack) {
-      print("Error loading image: $e");
-      state = AsyncValue.error(e, stack);
-    }
-  }
-}
+// class PicturesNotifier extends StateNotifier<AsyncValue<List<Object>>> {
+//   final PictureRepository repo;
+//
+//   PicturesNotifier({required this.repo}) : super(const AsyncValue.loading()) {
+//     _loadPic();
+//   }
+//
+//   Future<void> _loadPic() async {
+//     print("Loading picture...");
+//     state = const AsyncValue.loading();
+//     final List<Object> results = await Future.wait([
+//       repo.pictureLocalDataSource.getImageUI(PictureType.spaceWarsIcon.path,),
+//       repo.pictureLocalDataSource.getAssetImage(PictureType.snakeIcon.path),
+//     ]);
+//     try {
+//       state = AsyncValue.data(results);
+//       // final image = await repo.pictureLocalDataSource.getImageUI(
+//       //   PictureType.spaceWarsIcon.path,
+//       // );
+//       print("Image loaded successfully");
+//       // state = AsyncValue.data(image);
+//     } catch (e, stack) {
+//       print("Error loading image: $e");
+//       state = AsyncValue.error(e, stack);
+//     }
+//   }
+// }

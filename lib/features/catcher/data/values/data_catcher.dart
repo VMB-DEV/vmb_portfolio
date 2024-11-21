@@ -29,10 +29,10 @@ class CatcherData {
         "architectures. I enjoy making an effort to code clean to make my code more testable. The idea begin is to always write code easy to modigy or upgrade"
         "I'm looking forward to ear from you so do not hesitate and let's get in touch!"
     ,
-    Languages.french: "Actuellement étudiant chez Yutopia à Paris 11ème, j'ai toujours été passionné par la technologie."
+    Languages.french: "Actuellement étudiant chez Yutopia à Paris dans le 11ème, j'ai toujours été passionné par la technologie."
         " J'ai commencé à coder avec le bon vieux C et Vim. J'ai ensuite découvert Java, Kotlin, Dart à côté du JavaScript, Lua ou Python.\n"
         "J'aime particulièrement utiliser les IDE JetBrains avec le plugin Ideavim pour éditer au plus vite mon code."
-        " Je m'efforce à structurer et coder proprement pour rendre mon code le plus testable et modifiable."
+        " Je m'efforce à structurer et coder proprement pour rendre mon application la plus facilement testable et modifiable."
         " J'attends avec impatience d'entendre de vos nouvelles alors n'hesitez pas à me contacter!"
     ,
   };

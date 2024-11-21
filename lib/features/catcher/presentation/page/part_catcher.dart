@@ -142,6 +142,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
       listenable: _controller,
       fontWeight: FontWeight.w600,
       fontSize: sizes.fonts.medium,
+      textMaxWidth: sizes.descriptionWidth,
     ),
   );
 
@@ -152,6 +153,7 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
       listenable: _controller,
       fontWeight: FontWeight.w600,
       fontSize: sizes.fonts.medium,
+      textMaxWidth: sizes.descriptionWidth,
     ),
   );
 
