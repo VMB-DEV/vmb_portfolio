@@ -3,7 +3,8 @@ enum PictureType {
   linkedin( path: "/pictures/icons/100x100-linkedin-white.png", ),
   click( path: "/pictures/icons/512x512-click-white.png", ),
   firebase( path: "/pictures/icons/200x200-firebase-white.png"),
-  mail( path: "/pictures/icons/512x512-mail.png"),
+  mail( path: "/pictures/icons/512x512-mail-white.png"),
+  signal( path: "/pictures/icons/512x512-signal-white.png"),
   playstore( path: "/pictures/icons/512x512-playstore.png"),
   blackScreenshot(path: "/pictures/projects/540x1085-black-screenshot.png"),
   portfolioIcon(path: "/pictures/projects/portfolio/512x512-face.jpeg"),
@@ -43,6 +44,9 @@ enum PictureType {
   slideSignal(path: "/pictures/catcher/slide-signal.png"),
   slideUbuntu(path: "/pictures/catcher/slide-ubuntu.png"),
   slideVivaldi(path: "/pictures/catcher/slide-vivaldi.png"),
+  slideNodeJS(path: "/pictures/catcher/slide-node-js.png"),
+  slideVueJS(path: "/pictures/catcher/slide-vue-js.png"),
+  slideWebStorm(path: "/pictures/catcher/slide-webstorm.png"),
   me(path: "/pictures/catcher/holy-comic.png"),
   ;
 
@@ -50,21 +54,21 @@ enum PictureType {
   const PictureType({required this.path});
 
   bool get isCatcherIcon => this == github || this == linkedin;
-  bool get isContactIcon => this == github || this == linkedin || this == mail;
+  bool get isContactIcon => this == github || this == linkedin || this == mail || this == signal;
   static List<PictureType> get slidingIcons => [
     slideAndroidStudio,
     slideBash,
-    slideC,
     slideDart,
-    slideDebian,
-    slideFirebase,
-    slideFlutter,
-    slideGithub,
-    slideIdeaVim,
-    slideIntellij,
-    slideJetBrains,
-    slideJetBrainsToolbox,
     slideJS,
+    slideDebian,
+    slideJetBrains,
+    slideFirebase,
+    slideGithub,
+    slideFlutter,
+    slideIntellij,
+    slideIdeaVim,
+    slideC,
+    slideJetBrainsToolbox,
     slideKtor,
     slideLua,
     slideNeoVim,
@@ -74,5 +78,8 @@ enum PictureType {
     slideSignal,
     slideUbuntu,
     slideVivaldi,
+    slideNodeJS,
+    slideVueJS,
+    slideWebStorm,
   ];
 }

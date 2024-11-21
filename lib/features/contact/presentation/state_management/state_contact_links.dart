@@ -6,11 +6,13 @@ class ContactLinksState {
   final AsyncValue<IconTextLinkEntity> github;
   final AsyncValue<IconTextLinkEntity> linkedin;
   final AsyncValue<IconTextLinkEntity> mail;
+  final AsyncValue<IconTextLinkEntity> signal;
 
   const ContactLinksState( {
     this.github = const AsyncValue.loading(),
     this.linkedin = const AsyncValue.loading(),
     this.mail = const AsyncValue.loading(),
+    this.signal = const AsyncValue.loading(),
   });
 
   ContactLinksState copyWith({
@@ -22,6 +24,7 @@ class ContactLinksState {
       github: githubIcon ?? github,
       linkedin: linkedinIcon ?? linkedin,
       mail: linkedinIcon ?? linkedin,
+      signal: linkedinIcon ?? signal,
     );
   }
 }

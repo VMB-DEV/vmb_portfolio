@@ -31,7 +31,7 @@ class PictureLocalDataSourceImpl extends PictureLocalDataSource {
 
   @override
   Future<ui.Image> getImageUI(String path) async {
-    final ByteData data = await rootBundle.load("assets$path");
+    final ByteData data = await rootBundle.load("$path");
     final Uint8List bytes = data.buffer.asUint8List();
     final ui.Codec codec = await instantiateImageCodec(bytes);
     final FrameInfo fi = await codec.getNextFrame();

@@ -23,6 +23,10 @@ enum UrlType {
     text: "write me a mail",
     urlString: "mailto:cv2110.cut990@passmail.net",
   ),
+  mySignal(
+    text: "call me on signal",
+    urlString: "https://signal.me/#eu/WPeLY4iEl9q3rUmb_o4lxOnljFBN_cMnBCaQhBSj2aJKOF57GlxHIK8GKLHUXh34",
+  ),
   portfolioHosted(
     text: "firebase-web-app",
     urlString: "http://robuzzle-web.web.app",
