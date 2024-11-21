@@ -86,22 +86,58 @@ class _MyDescriptionState extends ConsumerState<MyDescriptionWidget> with Single
         _controller.reset();
         _controller.forward();
       }),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.elliptical(10, 5)),
-          border: Border.all(
-            color: MyColors.visibleText,
+      child: MouseRegion(
+        onEnter: (_) => setState(() => onHover = true),
+        onExit: (_) => setState(() => onHover = false),
+        child: AnimatedContainer(
+          curve: Curves.easeOutSine,
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.elliptical(10, 5)),
+            border: Border.all(
+              color: MyColors.visibleText,
+            ),
+            boxShadow: onHover ? const [
+              BoxShadow(
+                color: MyColors.visibleText,
+                spreadRadius: 3,
+                blurRadius: 12,
+                offset: Offset(0, 2), // changes position of shadow
+              ),
+            ] : [],
           ),
-        ),
-        child: AnimatedTextWidget(
-          text: widget.buttonText,
-          fontSize: widget.fontSize,
-          fontWeight: FontWeight.w600,
-          animation: _animationValue,
-          listenable: _controller,
-          textMaxWidth: widget.descriptionMaxWidth,
+          duration: const Duration(milliseconds: 250),
+          child: AnimatedTextWidget(
+            text: widget.buttonText,
+            fontSize: widget.fontSize,
+            fontWeight: FontWeight.w600,
+            animation: _animationValue,
+            listenable: _controller,
+            textMaxWidth: widget.descriptionMaxWidth,
+            textWidget: buttonText,
+          ),
         ),
       ),
     ) ;
   }
+
+  Widget get buttonText => RichText(
+    text: TextSpan(
+      text: widget.buttonText,
+      style: TextStyle(
+        fontFamily: 'Rajdhani',
+        fontWeight: FontWeight.w500,
+        fontSize: widget.fontSize,
+        color: onHover ? MyColors.darkFilter : MyColors.visibleText,
+        shadows: onHover ? [
+          const BoxShadow(
+            color: MyColors.visibleText,
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3),
+          ),
+        ] : [],
+      ),
+    ),
+  );
 }
+

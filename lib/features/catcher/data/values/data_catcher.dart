@@ -17,8 +17,8 @@ class CatcherData {
   };
 
   final Map<Languages, String> descriptionButton = {
-    Languages.english: "  click to learn more about myself  ",
-    Languages.french: "  cliquez pour en savoir plus  ",
+    Languages.english: "  learn more about myself  ",
+    Languages.french: "  pour en savoir plus  ",
   };
 
   final Map<Languages, String> description = {
