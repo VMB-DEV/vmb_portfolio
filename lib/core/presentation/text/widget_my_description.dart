@@ -12,13 +12,17 @@ import '../../state_management/riverpod/language/provider_language.dart';
 
 class MyDescriptionWidget extends ConsumerStatefulWidget {
   final String buttonText;
+  final FontWeight buttonFontWeight;
   final String descriptionText;
+  final FontWeight descriptionFontWeight;
   final double descriptionMaxWidth;
   final double fontSize;
 
   const MyDescriptionWidget({
     required this.buttonText,
+    required this.buttonFontWeight,
     required this.descriptionText,
+    required this.descriptionFontWeight,
     required this.descriptionMaxWidth,
     required this.fontSize,
     super.key,
@@ -75,7 +79,7 @@ class _MyDescriptionState extends ConsumerState<MyDescriptionWidget> with Single
       child: AnimatedTextWidget(
         text: widget.descriptionText,
         fontSize: widget.fontSize,
-        fontWeight: FontWeight.w600,
+        fontWeight: widget.descriptionFontWeight,
         animation: _animationValue,
         listenable: _controller,
         textMaxWidth: widget.descriptionMaxWidth,
@@ -109,7 +113,7 @@ class _MyDescriptionState extends ConsumerState<MyDescriptionWidget> with Single
           child: AnimatedTextWidget(
             text: widget.buttonText,
             fontSize: widget.fontSize,
-            fontWeight: FontWeight.w600,
+            fontWeight: widget.descriptionFontWeight,
             animation: _animationValue,
             listenable: _controller,
             textMaxWidth: widget.descriptionMaxWidth,
@@ -125,7 +129,7 @@ class _MyDescriptionState extends ConsumerState<MyDescriptionWidget> with Single
       text: widget.buttonText,
       style: TextStyle(
         fontFamily: 'Rajdhani',
-        fontWeight: FontWeight.w500,
+        fontWeight: widget.buttonFontWeight,
         fontSize: widget.fontSize,
         color: onHover ? MyColors.darkFilter : MyColors.visibleText,
         shadows: onHover ? [

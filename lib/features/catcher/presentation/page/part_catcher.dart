@@ -201,7 +201,9 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
 
   get _description => MyDescriptionWidget(
     buttonText: stringsData.descriptionButton,
+    buttonFontWeight: FontWeight.w600,
     descriptionText: stringsData.description,
+    descriptionFontWeight: FontWeight.w500,
     descriptionMaxWidth: sizes.descriptionWidth,
     fontSize: sizes.fonts.medium,
   );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/constants/custom_colors.dart';
@@ -225,8 +224,10 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     margin: widget.sizes.smallMargins.top,
     child: MyDescriptionWidget(
       buttonText: _entity.descriptionButton[language]!,
+      buttonFontWeight: FontWeight.w600,
       descriptionText: _entity.description[language]!,
-      fontSize: widget.sizes.fonts.medium,
+      descriptionFontWeight: FontWeight.w500,
+      fontSize: projectFontSize,
       descriptionMaxWidth: widget.sizes.descriptionWidth,
     ),
   );
