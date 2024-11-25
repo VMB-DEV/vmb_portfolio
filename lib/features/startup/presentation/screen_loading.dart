@@ -31,8 +31,7 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: AppBackground(child: ToConstruct(str: "SOME LOADING SCREEN"),
-      ),
+      home: AppBackground(child: const CircularProgressIndicator(), ),
     );
   }
 }
