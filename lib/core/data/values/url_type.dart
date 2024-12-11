@@ -40,7 +40,7 @@ enum UrlType {
     urlString: "https://github.com/VMB-DEV/robuzzle",
   ),
   robuzzleHosted(
-    text: "firebase-web-app",
+    text: "click here to try",
     urlString: "http://robuzzle-web.web.app",
   ),
   robuzzleGooglePlay(

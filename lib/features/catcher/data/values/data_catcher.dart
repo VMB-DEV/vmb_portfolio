@@ -7,8 +7,8 @@ class CatcherData {
   };
 
   final Map<Languages, String> mainTechno = {
-    Languages.english: "Main techno : Dart  -  Kotlin  -  JavaScript  -  Python  -  C",
-    Languages.french: "Principales technos : Dart  -  Kotlin  -  JavaScript  -  Python  -  C",
+    Languages.english: "Main languages : Dart  -  Kotlin  -  JavaScript  -  Python  -  C",
+    Languages.french: "Principaux languages : Dart  -  Kotlin  -  JavaScript  -  Python  -  C",
   };
 
   final Map<Languages, String> linkPrefix = {

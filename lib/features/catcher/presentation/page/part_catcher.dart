@@ -199,13 +199,16 @@ class _CatcherPartState extends ConsumerState<CatcherPart> with SingleTickerProv
     );
   }
 
-  get _description => MyDescriptionWidget(
-    buttonText: stringsData.descriptionButton,
-    buttonFontWeight: FontWeight.w600,
-    descriptionText: stringsData.description,
-    descriptionFontWeight: FontWeight.w500,
-    descriptionMaxWidth: sizes.descriptionWidth,
-    fontSize: sizes.fonts.medium,
+  get _description => Container(
+    padding: sizes.smallMargins.top,
+    child: MyDescriptionWidget(
+      buttonText: stringsData.descriptionButton,
+      buttonFontWeight: FontWeight.w600,
+      descriptionText: stringsData.description,
+      descriptionFontWeight: FontWeight.w500,
+      descriptionMaxWidth: sizes.descriptionWidth,
+      fontSize: sizes.fonts.medium,
+    ),
   );
 
   Widget _box({required child}) => Container(

@@ -47,7 +47,7 @@ enum PictureType {
   slideNodeJS(path: "/pictures/catcher/slide-node-js.png"),
   slideVueJS(path: "/pictures/catcher/slide-vue-js.png"),
   slideWebStorm(path: "/pictures/catcher/slide-webstorm.png"),
-  me(path: "/pictures/catcher/holy-comic.png"),
+  me(path: "/pictures/catcher/holy-comic3.png"),
   ;
 
   final String path;

@@ -31,7 +31,7 @@ enum ProjectData {
     },
     description: {
       Languages.english: "This application deployed with firebase has been build with Dart on the Flutter framework. The project in developed in a clean architecture /[feature, core]/[data, domain, presentation]. I choosed BLoC for state management.",
-      Languages.french: "Cette application est déployé grâce à firebase et est développé en Dart avec le framework Flutter. Le projet est structuré de la manière suiviant /[feature, core]/[data, domain, presentation]. J'ai choisi BLoC pour la gestion d'états.",
+      Languages.french: "Cette application est déployé grâce à firebase et est développé en Dart avec le framework Flutter. Le projet est structuré de la manière suivante /[feature, core]/[data, domain, presentation]. J'ai choisi BLoC pour la gestion d'états.",
     },
     techno:  "Dart, Flutter, BLoC, Hive",
     icon: PictureType.robuzzleIcon,
