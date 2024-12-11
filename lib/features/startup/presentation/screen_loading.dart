@@ -42,9 +42,9 @@ class _LoadingScreenState extends State<LoadingScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: AppBackground(child: const CircularProgressIndicator(), ),
+      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       home: AppBackground(child:
-
       Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

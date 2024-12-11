@@ -37,10 +37,9 @@ class _StartupState extends ConsumerState<StartUp> {
     debugShowMaterialGrid: false,
     debugShowCheckedModeBanner: false,
     home: const Scaffold(
-      body: LoadingScreen()
-      // AppBackground(
-      //   child: Portfolio(),
-      // ),
+      body: AppBackground(
+        child: Portfolio(),
+      ),
     ),
   );
 
