@@ -27,7 +27,7 @@ class _StartupState extends ConsumerState<StartUp> {
   Widget build(BuildContext context) {
     if (appLoaded) { return app; }
     final states = getProviders.map(ref.watch).toList();
-    checkStateErrors(states);
+    // checkStateErrors(states);
     checkStateLoaded(states);
     return const LoadingScreen();
   }
@@ -37,9 +37,10 @@ class _StartupState extends ConsumerState<StartUp> {
     debugShowMaterialGrid: false,
     debugShowCheckedModeBanner: false,
     home: const Scaffold(
-      body: AppBackground(
-        child: Portfolio(),
-      ),
+      body: LoadingScreen()
+      // AppBackground(
+      //   child: Portfolio(),
+      // ),
     ),
   );
 
@@ -50,12 +51,12 @@ class _StartupState extends ConsumerState<StartUp> {
     }
   }
 
-  void checkStateErrors(List<AsyncValue<Object?>> states) {
-    if (states.every((state) => state is AsyncData)) {
-      Log.blue('_StartupState.build - app loaded');
-      Future(() => setState(() => appLoaded = true));
-    }
-  }
+  // void checkStateErrors(List<AsyncValue<Object?>> states) {
+  //   if (states.every((state) => state is AsyncData)) {
+  //     Log.blue('_StartupState.build - app loaded');
+  //     Future(() => setState(() => appLoaded = true));
+  //   }
+  // }
 
   List<ProviderListenable<AsyncValue<Object?>>> get getProviders => <ProviderListenable<AsyncValue<Object?>>>[
     languageProvider,
