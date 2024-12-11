@@ -20,4 +20,8 @@ class GetContactLinksUseCase {
     UrlType.myGithub,
     await repo.getContactLinks(PictureType.github),
   );
+  Future<IconTextLinkEntity> get getSignalLink async => IconTextLinkEntity.from(
+    UrlType.mySignal,
+    await repo.getContactLinks(PictureType.signal),
+  );
 }

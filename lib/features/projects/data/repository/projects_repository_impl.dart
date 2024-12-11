@@ -24,6 +24,7 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
       type: type,
       concept: projectLocalDataSource.getConcept(type),
       description: projectLocalDataSource.getDescription(type),
+      descriptionButton: projectLocalDataSource.getDescriptionButton(type),
       techno: projectLocalDataSource.getTechno(type),
       links: await Future.wait(projectLocalDataSource.getLinks(type).map((pair) async => (await pictureLocalDataSource.getImageUI(pair.$1.path), pair.$2)).toList()),
       icon: await switch (type) {
@@ -37,7 +38,7 @@ class ProjectsRepositoryImpl implements ProjectsRepository {
         Project.robuzzle => pictureLocalDataSource.getImageUIList(ProjectData.robuzzle.assets.map((type) => type.path).toList()),
         Project.snake => pictureLocalDataSource.getImageUIList(ProjectData.snake.assets.map((type) => type.path).toList()),
         Project.spacewars => pictureLocalDataSource.getImageUIList(ProjectData.spacewars.assets.map((type) => type.path).toList()),
-      }
+      },
     );
   }
 }

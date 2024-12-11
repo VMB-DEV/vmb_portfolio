@@ -5,6 +5,7 @@ import 'package:vmb_portfolio/core/presentation/sizes/sizes.dart';
 import 'package:vmb_portfolio/core/presentation/titles/widget_title.dart';
 import 'core/state_management/riverpod/scroll/provider_scroll.dart';
 import 'features/catcher/presentation/page/part_catcher.dart';
+import 'features/contact/presentation/page/contact_part.dart';
 import 'features/header/presentation/page/widget_header.dart';
 import 'features/projects/presentation/page/project_part.dart';
 import 'features/startup/presentation/widget_startup.dart';
@@ -41,8 +42,8 @@ class Portfolio extends ConsumerWidget {
                         CatcherPart(sizes: allSizes.catcher, navBarKey: ref.watch(scrollRiverpod).navBarKeys[0],),
                         TitleWidget("My Projects", allSizes.titles, navBarKey: ref.watch(scrollRiverpod).navBarKeys[1]),
                         ProjectPart(sizes: allSizes.projects),
-                        // TitleWidget("My Contacts", allSizes.titles, navBarKey: ref.watch(scrollRiverpod).navBarKeys[2]),
-                        // ContactPart(sizes: allSizes),
+                        TitleWidget("My Contacts", allSizes.titles, navBarKey: ref.watch(scrollRiverpod).navBarKeys[2]),
+                        ContactPart(sizes: allSizes),
                       ],
                     ),
                   ),

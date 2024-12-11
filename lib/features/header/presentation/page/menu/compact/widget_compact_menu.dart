@@ -168,6 +168,7 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
         textSize: _stringSizes[index],
         listenable: _menuController,
         animation: _textAnimation,
+        reverseDirection: true,
       ),
     ),
   );

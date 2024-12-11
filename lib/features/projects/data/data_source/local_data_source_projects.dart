@@ -9,6 +9,7 @@ import '../values/data_project.dart';
 abstract class ProjectsLocalDataSource {
   Map<Languages, String> getConcept(Project project);
   Map<Languages, String> getDescription(Project project);
+  Map<Languages, String> getDescriptionButton(Project project);
   String getTechno(Project project);
   List<(PictureType, UrlType)> getLinks(Project project);
 }
@@ -20,6 +21,14 @@ class ProjectsLocalDataSourceImpl implements ProjectsLocalDataSource {
     Project.robuzzle => ProjectData.robuzzle.concept,
     Project.snake => ProjectData.snake.concept,
     Project.spacewars => ProjectData.spacewars.concept,
+  };
+
+  @override
+  Map<Languages, String> getDescriptionButton(Project project) => switch (project) {
+    Project.portfolio => ProjectData.portfolio.descriptionButton,
+    Project.robuzzle => ProjectData.robuzzle.descriptionButton,
+    Project.snake => ProjectData.snake.descriptionButton,
+    Project.spacewars => ProjectData.spacewars.descriptionButton,
   };
 
   @override

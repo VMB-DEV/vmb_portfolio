@@ -5,20 +5,26 @@ import 'package:vmb_portfolio/core/constants/custom_colors.dart';
 import 'package:vmb_portfolio/core/data/values/languages.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/core/presentation/text/animated_link_widget.dart';
+import 'package:vmb_portfolio/core/presentation/text/widget_animated_text.dart';
+import 'package:vmb_portfolio/core/presentation/text/widget_my_description.dart';
 import 'package:vmb_portfolio/core/state_management/riverpod/language/provider_language.dart';
 import 'package:vmb_portfolio/features/projects/domain/entity/entity_project.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/painter_title_delimiter.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/sizes_projects.dart';
 import 'package:vmb_portfolio/features/projects/presentation/page/widget_image_popup.dart';
-
 import '../../../../main.dart';
 
 class ProjectWidget extends ConsumerStatefulWidget {
   final ProjectEntity entity;
   final ProjectsSizes sizes;
+  final Animation<double> animationValue;
+  final AnimationController controller;
+
   const ProjectWidget({
     required this.entity,
     required this.sizes,
+    required this.animationValue,
+    required this.controller,
     super.key,
   });
 
@@ -57,7 +63,6 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     children: [
       _smallTextDescription,
       _smallPicturesLayout,
-      // _smallAssetDescription,
     ],
   );
 
@@ -120,12 +125,23 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
       children: [
         _concept,
         _techno,
+        _description,
         _sizes.isCompact ? _compactLinks : _largeLinks,
       ],
     ),
   );
 
-  Widget get _concept => projectText(text: _entity.concept[language]!);
+  Widget get _concept => Container(
+    margin: _sizes.smallMargins.top,
+    child: AnimatedTextWidget(
+      text: _entity.concept[language]!,
+      fontSize: projectFontSize,
+      fontWeight: FontWeight.w500,
+      animation: widget.controller,
+      listenable: widget.animationValue,
+      textMaxWidth: _sizes.descriptionWidth,
+    ),
+  );
 
   Languages get language => ref.watch(languageProvider).requireValue.language.requireValue;
 
@@ -135,7 +151,7 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     crossAxisAlignment: CrossAxisAlignment.end,
     children: [
       if (_entity.links.isNotEmpty) ...[
-        projectText(text: "links :"),
+        projectText(text: language.isFrench ? "liens :" : "links :"),
         AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[0])
       ],
       if (_entity.links.length > 1) AnimatedLinkWidget(sizes: _sizes, entity: _entity.links[1]),
@@ -168,9 +184,10 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
     child: Text(
       _entity.type.name,
       style: GoogleFonts.rajdhani(
-      color: MyColors.visibleText,
-      fontSize: _sizes.fonts.big,
-    ),),
+        color: MyColors.visibleText,
+        fontSize: _sizes.fonts.big,
+      ),
+    ),
   );
 
   Widget get _icon => ClipRRect(
@@ -183,18 +200,35 @@ class _ProjectWidgetState extends ConsumerState<ProjectWidget> {
   );
 
 
-  Widget projectText({required String text}) => AnimatedContainer(
-    duration: Duration(milliseconds: 500),
+  Widget projectText({required String text}) => Container(
     margin: _sizes.smallMargins.top,
-    child: Text(
-      text,
-      style: GoogleFonts.rajdhani(
-        // fontSize: sizes.fonts.medium,
-        fontSize: _sizes.isCompact ? _sizes.fonts.small : _sizes.fonts.medium,
-        color: MyColors.visibleText,
-      ),
+    child: AnimatedTextWidget(
+      text: text,
+      fontSize: projectFontSize,
+      fontWeight: FontWeight.w600,
+      animation: widget.animationValue,
+      listenable: widget.controller,
     ),
   );
 
+  double get projectFontSize => _sizes.isCompact ? _sizes.fonts.small : _sizes.fonts.medium;
+
+  TextStyle get projectTextStyle => GoogleFonts.rajdhani(
+    fontSize: _sizes.isCompact ? _sizes.fonts.small : _sizes.fonts.medium,
+    color: MyColors.visibleText,
+  );
+
   Widget get _titleDelimiter => Expanded(child: CustomPaint(painter: TitleDelimiterPainter()));
+
+  Widget get _description => Container(
+    margin: widget.sizes.smallMargins.top,
+    child: MyDescriptionWidget(
+      buttonText: _entity.descriptionButton[language]!,
+      buttonFontWeight: FontWeight.w600,
+      descriptionText: _entity.description[language]!,
+      descriptionFontWeight: FontWeight.w500,
+      fontSize: projectFontSize,
+      descriptionMaxWidth: widget.sizes.descriptionWidth,
+    ),
+  );
 }

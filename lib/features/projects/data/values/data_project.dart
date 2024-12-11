@@ -15,9 +15,9 @@ enum ProjectData {
     techno:  "Dart, Flutter, Riverpod",
     icon: PictureType.portfolioIcon,
     assets: [
-      PictureType.blackScreenshot,
-      PictureType.blackScreenshot,
-      PictureType.blackScreenshot,
+      PictureType.portfolioIconScreenshot1,
+      PictureType.portfolioIconScreenshot2,
+      PictureType.portfolioIconScreenshot3,
     ],
     links: [
       (PictureType.github, UrlType.portfolioGithub),
@@ -31,7 +31,7 @@ enum ProjectData {
     },
     description: {
       Languages.english: "This application deployed with firebase has been build with Dart on the Flutter framework. The project in developed in a clean architecture /[feature, core]/[data, domain, presentation]. I choosed BLoC for state management.",
-      Languages.french: "Cette application est déployé grâce à firebase et est développé en Dart avec le framework Flutter. Le projet est structuré de la manière suiviant /[feature, core]/[data, domain, presentation]. J'ai choisi BLoC pour la gestion d'états.",
+      Languages.french: "Cette application est déployé grâce à firebase et est développé en Dart avec le framework Flutter. Le projet est structuré de la manière suivante /[feature, core]/[data, domain, presentation]. J'ai choisi BLoC pour la gestion d'états.",
     },
     techno:  "Dart, Flutter, BLoC, Hive",
     icon: PictureType.robuzzleIcon,
@@ -93,6 +93,7 @@ enum ProjectData {
   final PictureType icon;
   final List<PictureType> assets;
   final List<(PictureType, UrlType)> links;
+  final Map<Languages, String> descriptionButton;
   const ProjectData({
     required this.concept,
     required this.description,
@@ -100,5 +101,9 @@ enum ProjectData {
     required this.icon,
     required this.assets,
     required this.links,
+    this.descriptionButton = const {
+      Languages.english: "  Click to learn more  ",
+      Languages.french: "  Cliquez ici pour en savoir plus  ",
+    },
   });
 }

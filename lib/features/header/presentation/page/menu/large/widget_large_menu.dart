@@ -18,7 +18,7 @@ class LargeMenuWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) => Row(
     children: [
-      ...PartEntity.values.withoutLast.mapIndexed((i, part)
+      ...PartEntity.values.sublist(0, 3).mapIndexed((i, part)
       => ButtonLargeHeaderWidget(
         text: part.name,
         sizes: sizes,

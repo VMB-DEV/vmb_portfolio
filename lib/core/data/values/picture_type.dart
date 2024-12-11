@@ -1,11 +1,16 @@
 enum PictureType {
   github( path: "/pictures/icons/100x100-github-white.png", ),
   linkedin( path: "/pictures/icons/100x100-linkedin-white.png", ),
+  click( path: "/pictures/icons/512x512-click-white.png", ),
   firebase( path: "/pictures/icons/200x200-firebase-white.png"),
-  mail( path: "/pictures/icons/512x512-mail.png"),
+  mail( path: "/pictures/icons/512x512-mail-white.png"),
+  signal( path: "/pictures/icons/512x512-signal-white.png"),
   playstore( path: "/pictures/icons/512x512-playstore.png"),
   blackScreenshot(path: "/pictures/projects/540x1085-black-screenshot.png"),
   portfolioIcon(path: "/pictures/projects/portfolio/512x512-face.jpeg"),
+  portfolioIconScreenshot1( path: "/pictures/projects/portfolio/557x925-screenshot1.png", ),
+  portfolioIconScreenshot2( path: "/pictures/projects/portfolio/557x925-screenshot2.png", ),
+  portfolioIconScreenshot3( path: "/pictures/projects/portfolio/557x925-screenshot3.png", ),
   robuzzleIcon( path: "/pictures/projects/robuzzle/200x200-robuzzle-icon.png", ),
   robuzzleScreenshot1( path: "/pictures/projects/robuzzle/540x1085-screenshot1.png", ),
   robuzzleScreenshot2( path: "/pictures/projects/robuzzle/540x1085-screenshot2.png", ),
@@ -15,7 +20,6 @@ enum PictureType {
   snakeScreenshot2( path: "/pictures/projects/snake/screenshot2.png", ),
   snakeScreenshot3( path: "/pictures/projects/snake/screenshot3.png", ),
   spaceWarsIcon( path: "/pictures/projects/spacewars/512x512-spacewars-icon.png"),
-  // spaceWarsIcon( path: "assets/assets/pictures/projects/spacewars/512x512-spacewars-icon.png"),
   spaceWarsScreenshot1( path: "/pictures/projects/spacewars/screenshot1.png"),
   spaceWarsScreenshot2( path: "/pictures/projects/spacewars/screenshot2.png"),
   spaceWarsScreenshot3( path: "/pictures/projects/spacewars/screenshot3.png"),
@@ -43,28 +47,31 @@ enum PictureType {
   slideSignal(path: "/pictures/catcher/slide-signal.png"),
   slideUbuntu(path: "/pictures/catcher/slide-ubuntu.png"),
   slideVivaldi(path: "/pictures/catcher/slide-vivaldi.png"),
-  me(path: "/pictures/catcher/holy-comic.png"),
+  slideNodeJS(path: "/pictures/catcher/slide-node-js.png"),
+  slideVueJS(path: "/pictures/catcher/slide-vue-js.png"),
+  slideWebStorm(path: "/pictures/catcher/slide-webstorm.png"),
+  me(path: "/pictures/catcher/holy-comic3.png"),
   ;
 
   final String path;
   const PictureType({required this.path});
 
   bool get isCatcherIcon => this == github || this == linkedin;
-  bool get isContactIcon => this == github || this == linkedin || this == mail;
+  bool get isContactIcon => this == github || this == linkedin || this == mail || this == signal;
   static List<PictureType> get slidingIcons => [
     slideAndroidStudio,
     slideBash,
-    slideC,
     slideDart,
-    slideDebian,
-    slideFirebase,
-    slideFlutter,
-    slideGithub,
-    slideIdeaVim,
-    slideIntellij,
-    slideJetBrains,
-    slideJetBrainsToolbox,
     slideJS,
+    slideDebian,
+    slideJetBrains,
+    slideFirebase,
+    slideGithub,
+    slideFlutter,
+    slideIntellij,
+    slideIdeaVim,
+    slideC,
+    slideJetBrainsToolbox,
     slideKtor,
     slideLua,
     slideNeoVim,
@@ -74,5 +81,8 @@ enum PictureType {
     slideSignal,
     slideUbuntu,
     slideVivaldi,
+    slideNodeJS,
+    slideVueJS,
+    slideWebStorm,
   ];
 }

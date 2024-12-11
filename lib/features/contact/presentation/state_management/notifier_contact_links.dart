@@ -17,17 +17,21 @@ class ContactLinksNotifier extends AsyncNotifier<ContactLinksState> {
         useCase.getGithubLink,
         useCase.getLinkedin,
         useCase.getMailLink,
+        useCase.getSignalLink,
       ]);
 
       return ContactLinksState(
         github: AsyncValue.data(results[0]),
         linkedin: AsyncValue.data(results[1]),
         mail: AsyncValue.data(results[2]),
+        signal: AsyncValue.data(results[3]),
       );
     } catch (e, stack) {
       return ContactLinksState(
         github: AsyncValue.error(e, stack),
         linkedin: AsyncValue.error(e, stack),
+        mail: AsyncValue.error(e, stack),
+        signal: AsyncValue.error(e, stack),
       );
     }
   }
