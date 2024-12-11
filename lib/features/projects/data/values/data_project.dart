@@ -15,9 +15,9 @@ enum ProjectData {
     techno:  "Dart, Flutter, Riverpod",
     icon: PictureType.portfolioIcon,
     assets: [
-      PictureType.blackScreenshot,
-      PictureType.blackScreenshot,
-      PictureType.blackScreenshot,
+      PictureType.portfolioIconScreenshot1,
+      PictureType.portfolioIconScreenshot2,
+      PictureType.portfolioIconScreenshot3,
     ],
     links: [
       (PictureType.github, UrlType.portfolioGithub),
