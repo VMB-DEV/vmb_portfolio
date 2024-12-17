@@ -11,6 +11,7 @@ import 'package:vmb_portfolio/features/header/presentation/page/menu/compact/pai
 import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
 import 'package:vmb_portfolio/features/header/presentation/state_management/provider_header_url.dart';
 import '../../../../../../core/constants/custom_colors.dart';
+import '../../../../../../core/data/values/languages.dart';
 import '../../../../../../core/state_management/riverpod/scroll/provider_scroll.dart';
 
 class CompactMenuWidget extends ConsumerStatefulWidget {
@@ -35,6 +36,7 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
   late Animation<double> _widthAnimation;
   late Animation<double> _textAnimation;
   HeaderSizes get sizes => widget.sizes;
+  Languages get language => ref.watch(languageProvider).requireValue.language.requireValue;
 
   @override
   void initState() {
@@ -120,7 +122,7 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
 
   CustomPainter get unfoldMenuPainter => CompactMenuPainter(
     sizes: sizes,
-    texts: PartEntity.names,
+    texts: PartEntity.names(Languages.english),
     animationPercent: _animation,
     heightAnimation: _heightAnimation,
     widthAnimation: _widthAnimation,
@@ -137,8 +139,8 @@ class _CompactMenuWidgetState extends ConsumerState<CompactMenuWidget> with Sing
     padding: EdgeInsetsDirectional.only(top: sizes.rightPartCompactMenuDelta),
     child: Column(
       children: [
-        ...PartEntity.names.sublist(0, 3).mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
-        clickablePart(PartEntity.resume.name, PartEntity.values.indexOf(PartEntity.resume), openResume),
+        ...PartEntity.names(language).sublist(0, 3).mapIndexed((i, name) => clickablePart(name, i, scrollAction(i)), ),
+        clickablePart(PartEntity.resume.text[language]!, PartEntity.values.indexOf(PartEntity.resume), openResume),
         clickablePart("en / fr", PartEntity.values.indexOf(PartEntity.language), switchLanguage)
       ],
     ),

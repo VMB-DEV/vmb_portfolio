@@ -8,6 +8,8 @@ import 'package:vmb_portfolio/features/header/presentation/page/menu/large/widge
 import 'package:vmb_portfolio/features/header/presentation/page/menu/large/widget_switch_langugae.dart';
 import 'package:vmb_portfolio/features/header/presentation/page/sizes_header.dart';
 
+import '../../../../../../core/data/values/languages.dart';
+import '../../../../../../core/state_management/riverpod/language/provider_language.dart';
 import '../../../../../../core/state_management/riverpod/scroll/provider_scroll.dart';
 import '../../../state_management/provider_header_url.dart';
 
@@ -16,25 +18,28 @@ class LargeMenuWidget extends ConsumerWidget {
   const LargeMenuWidget({required this.sizes, super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => Row(
-    children: [
-      ...PartEntity.values.sublist(0, 3).mapIndexed((i, part)
-      => ButtonLargeHeaderWidget(
-        text: part.name,
-        sizes: sizes,
-        index: i,
-        onTap: updateResume(ref, i),
-      )),
-      ButtonLargeHeaderWidget(
-        text: PartEntity.resume.name,
-        sizes: sizes,
-        index: PartEntity.resume.index,
-        onTap: openResume(ref)
-      ),
-      LanguageSwitchWidget(sizes: sizes),
-    ]
-    ,
-  );
+  Widget build(BuildContext context, WidgetRef ref) {
+    Languages language = ref.watch(languageProvider).requireValue.language.requireValue;
+    return Row(
+      children: [
+        ...PartEntity.names(language).sublist(0, 3).mapIndexed((i, str)
+        => ButtonLargeHeaderWidget(
+          text: str,
+          sizes: sizes,
+          index: i,
+          onTap: updateResume(ref, i),
+        )),
+        ButtonLargeHeaderWidget(
+            text: PartEntity.resume.text[language]!,
+            sizes: sizes,
+            index: PartEntity.resume.index,
+            onTap: openResume(ref)
+        ),
+        LanguageSwitchWidget(sizes: sizes),
+      ]
+      ,
+    );
+  }
 
   VoidCallback updateResume(WidgetRef ref, int index) => () {
     ref.read(scrollRiverpod).updateIndexTo(index);
