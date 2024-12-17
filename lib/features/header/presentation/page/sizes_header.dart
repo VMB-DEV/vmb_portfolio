@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vmb_portfolio/core/extensions/box_constraints.dart';
 import 'package:vmb_portfolio/features/header/domain/entity/entity_part.dart';
 
+import '../../../../core/data/values/languages.dart';
 import '../../../../core/presentation/sizes/sizes.dart';
 
 class HeaderSizes extends Sizes {
@@ -59,6 +60,7 @@ class HeaderSizes extends Sizes {
         + _rightPartCompactMenuListTopDelta
     );
   }
+
   double get rightPartShadowTopBlueRadius => _rightPartShadowTopBlueRadius;
   double get rightPartShadowBotBlueRadius => _rightPartShadowBotBlueRadius;
   EdgeInsetsDirectional get horizontalSmallMargin => _horizontalSmallMargin;
@@ -114,7 +116,7 @@ class HeaderSizes extends Sizes {
   }
 
   List<Size> get _getStringSizes => PartEntity
-      .names
+      .names(Languages.english)
       .map((name) => _getStringSize(name))
       .toList();
 }
